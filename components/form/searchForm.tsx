@@ -19,6 +19,25 @@ const SearchForm = () => {
     e.preventDefault();
     // Handle the search logic here
   };
+  const search = (
+    <div className="relative w-full">
+      <input
+        type="search"
+        id="search-dropdown"
+        className="block p-3 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-full focus:ring-0 focus:outline-none border-0 "
+        placeholder="Search ..."
+        required
+      />
+      <button
+        type="submit"
+        className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white  rounded-e-full  bg-secondary_1"
+      >
+        <Search />
+
+        <span className="sr-only">Search</span>
+      </button>
+    </div>
+  );
 
   return (
     <form
@@ -78,23 +97,7 @@ const SearchForm = () => {
             </ul>
           </div>
         )}
-        <div className="relative w-full">
-          <input
-            type="search"
-            id="search-dropdown"
-            className="block p-3 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-full focus:ring-0 focus:outline-none border-0 "
-            placeholder="Search ..."
-            required
-          />
-          <button
-            type="submit"
-            className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white  rounded-e-full  bg-secondary_1"
-          >
-            <Search />
-
-            <span className="sr-only">Search</span>
-          </button>
-        </div>
+        {search}
       </div>
     </form>
   );

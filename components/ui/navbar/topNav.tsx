@@ -1,18 +1,14 @@
-import React from "react";
-import FlexBox from "../layout/flexbox";
-import FlexBetween from "../layout/flexBetween";
+import Container from "@/components/layout/container";
+import FlexBetween from "@/components/layout/flexBetween";
+import FlexBox from "@/components/layout/flexbox";
 import {
   ArrowDown,
   Facebook,
-  Locate,
   Mails,
   MapPinHouse,
   Twitch,
   Youtube,
 } from "lucide-react";
-import Container from "../layout/container";
-
-const hoverEffect = " hover:text-secondary_1";
 
 const TopNav: React.FC = () => {
   return (
@@ -26,7 +22,10 @@ const TopNav: React.FC = () => {
             </FlexBox>
             <FlexBox classname="flex gap-2">
               <MapPinHouse className="text-secondary_1 hover:text-secondary_1" />{" "}
-              <span className=" hover:text-secondary_1"> info@webmail.com</span>
+              <span className=" hover:text-secondary_1">
+                {" "}
+                Dhaka, Bangladesh
+              </span>
             </FlexBox>
           </FlexBox>
           <FlexBox classname=" gap-7 ">

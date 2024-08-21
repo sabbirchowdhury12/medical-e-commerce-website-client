@@ -13,7 +13,7 @@ const FlexBox: React.FC<FlexBetweenProps> = ({
 }) => {
   return (
     <div
-      className={`flex items-center justify-between gap-${gap} ${classname}`}
+      className={`flex items-center justify-center  gap-${gap} ${classname}`}
     >
       {children}
     </div>

@@ -19,7 +19,7 @@ const MenuNav = () => {
   return (
     <>
       <FlexBox
-        classname="bg-secondary_1 p-6 text-sm font-bold text-section_bg_1 uppercase"
+        classname="bg-secondary_1 p-6 text-sm font-bold text-section_bg_1 uppercase hidden md:flex"
         gap="16"
       >
         <MenuItems />

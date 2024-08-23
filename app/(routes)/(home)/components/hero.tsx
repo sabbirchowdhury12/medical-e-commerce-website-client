@@ -103,7 +103,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <HeroCard />
+      {/* <HeroCard /> */}
     </div>
   );
 };

@@ -5,6 +5,7 @@ interface FlexBetweenProps {
   children: React.ReactNode;
   className?: string;
   gap?: string;
+  onClick?: () => {};
 }
 
 const FlexBox: React.FC<FlexBetweenProps> = ({ children, className, gap }) => {

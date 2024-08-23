@@ -33,8 +33,8 @@ const SideNavbar = ({ setIsOpen }: any) => {
   return (
     <>
       {" "}
-      <FlexBetween classname=" w-full">
-        <FlexBox classname="" gap="4">
+      <FlexBetween className=" w-full">
+        <FlexBox className="" gap="4">
           <CustomImage src={Logo} alt={""} />
         </FlexBox>
         <button onClick={() => setIsOpen(false)} className="font-bold text-lg">

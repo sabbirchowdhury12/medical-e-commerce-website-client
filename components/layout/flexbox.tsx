@@ -1,19 +1,16 @@
+import { cn } from "@/assets/lib/utils";
 import React from "react";
 
 interface FlexBetweenProps {
   children: React.ReactNode;
-  classname?: string;
+  className?: string;
   gap?: string;
 }
 
-const FlexBox: React.FC<FlexBetweenProps> = ({
-  children,
-  classname = "",
-  gap,
-}) => {
+const FlexBox: React.FC<FlexBetweenProps> = ({ children, className, gap }) => {
   return (
     <div
-      className={`flex items-center justify-center  gap-${gap} ${classname}`}
+      className={cn(`flex items-center justify-center  gap-${gap}`, className)}
     >
       {children}
     </div>

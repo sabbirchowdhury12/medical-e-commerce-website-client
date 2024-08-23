@@ -11,6 +11,7 @@ import Image from "next/image";
 import CustomImage from "@/components/image/customImage";
 import App from "./example2";
 import HeroCarousel from "./carousel";
+import HeroCard from "./heroCard";
 
 const categories = [
   {
@@ -63,42 +64,46 @@ const Hero = () => {
   };
 
   return (
-    <div className="flex gap-6 my-10 flex-col md:flex-row ">
-      <div className="category  ">
-        <span onClick={toggleCategories}>
-          <FlexBetween classname="bg-secondary_1 gap-10 text-white p-6 cursor-pointer ">
-            <MenuIcon />
+    <div className="">
+      <div className="flex gap-6 my-10 flex-col md:flex-row">
+        <div className="category  ">
+          <span onClick={toggleCategories}>
+            <FlexBetween className="bg-secondary_1 gap-10 text-white p-6 cursor-pointer ">
+              <MenuIcon />
 
-            <p className="text-xl font-bold ml-10">Categories</p>
-          </FlexBetween>
-        </span>
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            >
-              {categories.map((item, ind) => {
-                return (
-                  <FlexBox
-                    classname="border-2 border-t-0 border-border_primary  p-4 text-paragraph text-lg"
-                    gap="4"
-                    key={ind}
-                  >
-                    <ShoppingBag size={18} />
-                    {item.title}
-                  </FlexBox>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <p className="text-xl font-bold ml-10">Categories</p>
+            </FlexBetween>
+          </span>
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              >
+                {categories.map((item, ind) => {
+                  return (
+                    <FlexBox
+                      className="border-2 border-t-0 border-border_primary  p-4 text-paragraph text-lg"
+                      gap="4"
+                      key={ind}
+                    >
+                      <ShoppingBag size={18} />
+                      {item.title}
+                    </FlexBox>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        <div className="banner  flex-1">
+          <HeroCarousel />
+        </div>
       </div>
-      <div className="banner  flex-1">
-        <HeroCarousel />
-      </div>
+
+      <HeroCard />
     </div>
   );
 };

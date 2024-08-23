@@ -19,14 +19,14 @@ const MenuNav = () => {
   return (
     <>
       <FlexBox
-        classname="bg-secondary_1 p-6 text-sm font-bold text-section_bg_1 uppercase hidden md:flex"
+        className="bg-secondary_1 p-6 text-sm font-bold text-section_bg_1 uppercase hidden md:flex"
         gap="16"
       >
         <MenuItems />
       </FlexBox>
 
       <Container>
-        <FlexBetween classname="border  border-border_primary p-3 rounded-sm md:hidden">
+        <FlexBetween className="border  border-border_primary p-3 rounded-sm md:hidden">
           <span className="text-paragraph text-sm font-bold">MENU</span>
           <span>
             <span onClick={() => setIsOpen(true)}>

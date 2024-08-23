@@ -17,7 +17,7 @@ const StickyNav = () => {
           <FlexBox>
             <CustomImage src={Logo} alt="" />
           </FlexBox>
-          <FlexBox gap="12" classname="text-white font-bold text-sm">
+          <FlexBox gap="12" className="text-white font-bold text-sm">
             <MenuItems />
           </FlexBox>
         </FlexBetween>

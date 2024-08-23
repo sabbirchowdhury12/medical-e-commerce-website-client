@@ -15,11 +15,11 @@ const SecondNav = () => {
 
   return (
     <Container>
-      <FlexBetween classname="p-6">
-        <FlexBox classname="" gap="4">
+      <FlexBetween className="p-6">
+        <FlexBox className="" gap="4">
           <CustomImage src={Logo} alt={""} />
         </FlexBox>
-        <FlexBox gap="4" classname="text-paragraph hidden md:flex">
+        <FlexBox gap="4" className="text-paragraph hidden md:flex">
           <PhoneCall size={30} />
           <p className="text-sm">
             Phone <br />
@@ -31,7 +31,7 @@ const SecondNav = () => {
             <SearchForm />
           </span>
         </div>
-        <FlexBox gap="6" classname="relative">
+        <FlexBox gap="6" className="relative">
           <span className="md:hidden relative">
             <Search onClick={() => setActiveSearch(!activeSearch)} />
             {activeSearch && (

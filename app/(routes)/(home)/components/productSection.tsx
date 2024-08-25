@@ -76,7 +76,7 @@ const products = [
 const ProductSection = () => {
   const [category, setCategory] = useState("");
   return (
-    <section className="h-screen ">
+    <section>
       <Heading
         title="Our Products"
         sub_title="A highly efficient slip-ring scanner for today's diagnostic requirements."

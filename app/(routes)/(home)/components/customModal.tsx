@@ -38,7 +38,7 @@ const CustomModal: React.FC<ModalProps> = ({
               "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/product-2/11.png"
             }
             alt=""
-            className="h-40 bg-section_bg_1 "
+            className="h-32 bg-section_bg_1 "
           />
         </div>
         <div className="flex-1">

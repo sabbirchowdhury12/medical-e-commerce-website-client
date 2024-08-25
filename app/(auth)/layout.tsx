@@ -1,15 +1,14 @@
-import Footers from "@/components/ui/footer";
 import Navbar from "@/components/ui/navbar/navbar";
 import React from "react";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="">
       <Navbar />
       {children}
-      <Footers />
+      <p>Footer</p>
     </main>
   );
 };
 
-export default MainLayout;
+export default AuthLayout;

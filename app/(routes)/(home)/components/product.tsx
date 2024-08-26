@@ -1,5 +1,4 @@
 "use client";
-import CustomImage from "@/components/image/customImage";
 import FlexBox from "@/components/layout/flexbox";
 import { Button, Modal } from "flowbite-react";
 import { motion } from "framer-motion";
@@ -10,9 +9,12 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { useState } from "react";
-import CustomModal from "./customModal";
-import { title } from "process";
 import path from "path";
+import Link from "next/link";
+import { useAppDispatch } from "@/redux/hook";
+import { increment } from "@/redux/slice/counterSlice";
+import CustomImage from "@/components/image/customImage";
+import CustomModal from "@/components/ui/customModal";
 
 const Product = ({ product }: any) => {
   const [openModal, setOpenModal] = useState(false);
@@ -20,7 +22,10 @@ const Product = ({ product }: any) => {
   const [message, setMessage] = useState("");
   const [button, setButton] = useState({});
 
-  const handleCart = () => {
+  const dispatch = useAppDispatch();
+
+  const handleCart = (id: string) => {
+    dispatch(increment(id));
     setOpenModal(true);
     setCurrentProduct(product);
     setMessage(" Successfully added to your Cart");
@@ -56,12 +61,11 @@ const Product = ({ product }: any) => {
       </p>
 
       <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center space-x-4 bg-white border border-border_color_7  p-4  top-1/4 opacity-0 transition-all duration-500 ease-in-out group-hover:top-1/2 group-hover:opacity-100">
-        <EyeIcon
-          onClick={() => handleCart()}
-          className="w-12  border-r-2 border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white"
-        />
+        <Link href={`/product/details/${product?._id}`}>
+          <EyeIcon className="w-12  border-r-2 border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white" />
+        </Link>
         <ShoppingCart
-          onClick={() => handleCart()}
+          onClick={() => handleCart(product?._id)}
           className="w-12  border-r-2 border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white"
         />
         <Heart

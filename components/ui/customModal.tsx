@@ -34,11 +34,9 @@ const CustomModal: React.FC<ModalProps> = ({
       <FlexBetween className="pt-10 pb-20 gap-10 font-sans">
         <div className="">
           <CustomImage
-            src={
-              "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/product-2/11.png"
-            }
+            src={product.photos[0]}
             alt=""
-            className="h-32 bg-section_bg_1 "
+            className="h-28 bg-section_bg_1 "
           />
         </div>
         <div className="flex-1">

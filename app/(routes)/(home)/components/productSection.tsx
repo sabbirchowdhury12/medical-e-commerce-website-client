@@ -6,6 +6,9 @@ import { HR } from "flowbite-react";
 import React, { useState } from "react";
 import Product from "./product";
 import Button from "@/components/ui/button";
+import { useGetAllProductQuery } from "@/redux/api/productApi";
+import Loader from "@/components/loding";
+import ProductGrid from "@/components/ui/productGrid";
 
 const Category = [
   {
@@ -27,6 +30,7 @@ const Category = [
 ];
 const products = [
   {
+    _id: "01",
     name: "Product 1",
     slug: "product-1",
     photos: [
@@ -50,6 +54,7 @@ const products = [
     updatedAt: new Date(),
   },
   {
+    _id: "02",
     name: "Product 2",
     slug: "product-2",
     photos: [
@@ -75,6 +80,12 @@ const products = [
 ];
 const ProductSection = () => {
   const [category, setCategory] = useState("");
+
+  const { data, error, isLoading } = useGetAllProductQuery({});
+
+  // if (isLoading) {
+  //   return <Loader />;
+  // }
   return (
     <section>
       <Heading
@@ -100,11 +111,8 @@ const ProductSection = () => {
       </FlexBox>
 
       {/* product card  */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {products.map((product) => (
-          <Product key={product.slug} product={product} />
-        ))}
-      </div>
+
+      <ProductGrid products={products} />
     </section>
   );
 };

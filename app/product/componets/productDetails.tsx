@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useAppDispatch } from "@/redux/hook";
 import { useParams } from "next/navigation";
 import HeroBreadcrumb from "@/components/ui/heroBreadcrumb";
 import FlexBox from "@/components/layout/flexbox";
@@ -14,6 +14,7 @@ import Container from "@/components/layout/container";
 import CustomModal from "@/components/ui/customModal";
 
 const product = {
+  _id: "01",
   name: "Product 1",
   slug: "product-1",
   photos: [
@@ -45,21 +46,7 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const dispatch = useAppDispatch();
 
-  // Ensure productId is always a string
   const id = Array.isArray(productId) ? productId[0] : productId;
-
-  // const count = useAppSelector((state) => selectProductQuantity(state, id));
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const storedCart = localStorage.getItem("Medicine-Cart");
-  //     if (storedCart) {
-  //       const cartProducts = JSON.parse(storedCart);
-  //       dispatch(initializeCart(cartProducts));
-  //     }
-  //   }
-  // }, [dispatch]);
-  console.log(price);
 
   return (
     <div className="h-screen">

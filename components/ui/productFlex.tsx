@@ -1,16 +1,13 @@
-/* eslint-disable react/jsx-key */
 "use client";
 
 import { useAppDispatch } from "@/redux/hook";
 import { increment } from "@/redux/slice/counterSlice";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import CustomImage from "../image/customImage";
-import Link from "next/link";
-import { EyeIcon, Heart, ShoppingCart } from "lucide-react";
-import CustomModal from "./customModal";
 import FlexBox from "../layout/flexbox";
 import FlexBetween from "../layout/flexBetween";
+import ProductIcon from "../productIcon";
+import CustomModal from "./customModal";
 
 const ProductFlex = ({ products }: any) => {
   const [openModal, setOpenModal] = useState(false);
@@ -37,7 +34,10 @@ const ProductFlex = ({ products }: any) => {
   return (
     <div className="flex flex-col gap-6">
       {products?.map((product: any) => (
-        <div className="group border-4  border-border_color_8 p-8 text-center relative">
+        <div
+          key={product._id}
+          className="group border-4  border-border_color_8 p-8 text-center relative"
+        >
           <FlexBetween className="flex-col md:flex-row">
             <div>
               <CustomImage
@@ -62,32 +62,25 @@ const ProductFlex = ({ products }: any) => {
               </p>
 
               <div className="flex  shadow-lg border border-border_color_8">
-                <div className="w-12  flex justify-center items-center  border-r-2 h-12 text-center border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white">
-                  <Link href={`/product/details/${product?._id}`}>
-                    <EyeIcon />
-                  </Link>
-                </div>
-                <div className="w-12  flex justify-center items-center h-12 text-center border-border_color_7  border-r-2 hover:bg-secondary_1 text-paragraph hover:text-white">
-                  <ShoppingCart
-                    onClick={() => handleCart(product?._id, product)}
-                  />
-                </div>
-                <div className="w-12  flex justify-center items-center   h-12 text-center  hover:bg-secondary_1 text-paragraph hover:text-white">
-                  <Heart onClick={() => handleWishlist(product)} />
-                </div>
+                <ProductIcon
+                  id={product._id}
+                  product={product}
+                  handleCart={handleCart}
+                  handleWishlist={handleWishlist}
+                />
               </div>
             </FlexBox>
           </FlexBetween>
 
-          {/* {openModal && (
-        <CustomModal
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          message={message}
-          button={button}
-          product={currentProduct}
-        />
-      )} */}
+          {openModal && (
+            <CustomModal
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+              message={message}
+              button={button}
+              product={currentProduct}
+            />
+          )}
         </div>
       ))}
     </div>

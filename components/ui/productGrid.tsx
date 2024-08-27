@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 "use client";
 
 import { useAppDispatch } from "@/redux/hook";
@@ -6,9 +5,8 @@ import { increment } from "@/redux/slice/counterSlice";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import CustomImage from "../image/customImage";
-import Link from "next/link";
-import { EyeIcon, Heart, ShoppingCart } from "lucide-react";
 import CustomModal from "./customModal";
+import ProductIcon from "../productIcon";
 
 const ProductGrid = ({ products }: any) => {
   const [openModal, setOpenModal] = useState(false);
@@ -36,6 +34,7 @@ const ProductGrid = ({ products }: any) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {products?.map((product: any) => (
         <motion.div
+          key={product._id}
           whileHover={{
             scale: 1.03,
             boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.15)",
@@ -57,16 +56,11 @@ const ProductGrid = ({ products }: any) => {
           </p>
 
           <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center space-x-4 bg-white border border-border_color_7  p-4  top-1/4 opacity-0 transition-all duration-500 ease-in-out group-hover:top-1/2 group-hover:opacity-100">
-            <Link href={`/product/details/${product?._id}`}>
-              <EyeIcon className="w-12  border-r-2 border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white" />
-            </Link>
-            <ShoppingCart
-              onClick={() => handleCart(product?._id, product)}
-              className="w-12  border-r-2 border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white"
-            />
-            <Heart
-              onClick={() => handleWishlist(product)}
-              className="w-12   hover:bg-secondary_1 text-paragraph hover:text-white"
+            <ProductIcon
+              id={product._id}
+              product={product}
+              handleCart={handleCart}
+              handleWishlist={handleWishlist}
             />
           </div>
 

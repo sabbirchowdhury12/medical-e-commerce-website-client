@@ -6,3 +6,7 @@
 * {
   font-family: sans-serif;
 }
+
+.h2-styles {
+  @apply text-lg font-bold  my-4;
+}

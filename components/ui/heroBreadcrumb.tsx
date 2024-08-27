@@ -13,6 +13,7 @@ const HeroBreadcrumb = ({ path, title }) => {
         backgroundPosition: "center",
         height: "300px",
         width: "100%",
+        marginBottom: "100px",
       }}
     >
       <Container>

@@ -1,6 +1,6 @@
 const FormInput = ({ labelValue, type, placeholder, name }: any) => {
   return (
-    <>
+    <div className="flex-1 w-full">
       <div className="mb-2 block ">
         <label
           htmlFor={labelValue}
@@ -17,7 +17,7 @@ const FormInput = ({ labelValue, type, placeholder, name }: any) => {
         name={name}
         required
       />
-    </>
+    </div>
   );
 };
 

@@ -36,13 +36,13 @@ const ProductFlex = ({ products }: any) => {
       {products?.map((product: any) => (
         <div
           key={product._id}
-          className="group border-4  border-border_color_8 p-8 text-center relative"
+          className="group border-4 hover:shadow-lg  border-border_color_8 p-8 text-center relative"
         >
           <FlexBetween className="flex-col md:flex-row">
             <div>
               <CustomImage
                 src={product.photos[0]}
-                className="h-40 "
+                className="h-36 w-36"
                 alt={product.slug}
               />
             </div>

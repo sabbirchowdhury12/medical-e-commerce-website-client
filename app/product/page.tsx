@@ -1,8 +1,14 @@
 import React from "react";
 import ProductClient from "./componets/productClient";
+import HeroBreadcrumb from "@/components/ui/heroBreadcrumb";
 
-const Page = () => {
-  return <ProductClient />;
+const ProductPage = () => {
+  return (
+    <>
+      <HeroBreadcrumb title={"shop"} path={"shop"} />
+      <ProductClient />;
+    </>
+  );
 };
 
-export default Page;
+export default ProductPage;

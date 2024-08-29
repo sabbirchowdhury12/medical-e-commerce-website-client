@@ -36,7 +36,7 @@ const CustomModal: React.FC<ModalProps> = ({
           <CustomImage
             src={product.photos[0]}
             alt=""
-            className="h-28 bg-section_bg_1 "
+            className="h-28 w-28 bg-section_bg_1 "
           />
         </div>
         <div className="flex-1">

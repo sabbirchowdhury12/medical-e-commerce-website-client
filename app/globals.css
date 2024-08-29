@@ -3,10 +3,19 @@
 @tailwind utilities;
 @import "flowbite";
 
-* {
-  font-family: sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+*,
+body {
+  font-family: "Open Sans", sans-serif;
 }
 
-.h2-styles {
-  @apply text-lg font-bold  my-4;
+.h4-styles {
+  @apply text-lg font-bold  my-6  border-l-4 pl-4 border-secondary_1  capitalize;
+}
+.p-styles {
+  @apply text-black;
+}
+.p-bold {
+  @apply text-paragraph font-bold;
 }

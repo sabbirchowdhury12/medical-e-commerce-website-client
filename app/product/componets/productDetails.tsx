@@ -12,6 +12,7 @@ import CustomImage from "@/components/image/customImage";
 import FlexBetween from "@/components/layout/flexBetween";
 import Container from "@/components/layout/container";
 import CustomModal from "@/components/ui/customModal";
+import { DropdownInput } from "@/components/form/dropdown";
 
 const product = {
   _id: "01",
@@ -45,6 +46,7 @@ const ProductDetails = () => {
   const [price, setPrice] = useState(product?.defaultPrice);
   const { productId } = useParams();
   const dispatch = useAppDispatch();
+  const [selectedVariantName, setSelectedVariantName] = useState<string>("");
 
   const id = Array.isArray(productId) ? productId[0] : productId;
 
@@ -60,29 +62,21 @@ const ProductDetails = () => {
               <p className="text-3xl text-secondary_1 font-bold">${price}</p>
               <HR />
               <div className="max-w-md">
-                <div className="mb-2 block">
-                  <Label htmlFor="variant" value="Select Varients" />
-                </div>
-                <Select
-                  id="variant"
-                  required
-                  onChange={(e) => {
+                <DropdownInput
+                  label="types"
+                  value={selectedVariantName} // Assuming you have state to manage the selected variant name
+                  items={product?.variants.map((item) => item.variantName)}
+                  onChange={(value) => {
                     const selectedVariant = product.variants.find(
-                      (variant) => variant.variantName === e.target.value
+                      (variant) => variant.variantName === value
                     );
                     if (selectedVariant) {
                       setPrice(selectedVariant.variantPrice);
+                      setSelectedVariantName(value); // Update the state with the selected variant name
                     }
                   }}
-                >
-                  {product?.variants.map((item) => (
-                    <option key={item._id} value={item.variantName}>
-                      {item.variantName}
-                    </option>
-                  ))}
-                </Select>
+                />
               </div>
-              <HR />
               <HR />
 
               <p>

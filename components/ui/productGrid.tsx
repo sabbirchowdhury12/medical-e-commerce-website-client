@@ -55,7 +55,7 @@ const ProductGrid = ({ products }: any) => {
             -{product.discount}%
           </p>
 
-          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center space-x-4 bg-white border border-border_color_7  p-4  top-1/4 opacity-0 transition-all duration-500 ease-in-out group-hover:top-1/2 group-hover:opacity-100">
+          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-white shadow-lg  top-1/4 opacity-0 transition-all duration-500 ease-in-out group-hover:top-1/2 group-hover:opacity-100">
             <ProductIcon
               id={product._id}
               product={product}

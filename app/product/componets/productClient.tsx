@@ -60,30 +60,28 @@ const products = [
 const ProductClient = () => {
   const [view, setView] = useState<"flex" | "grid">("grid");
   return (
-    <div>
-      <HeroBreadcrumb title={"shop"} path={"shop"} />
-
-      <div className="flex items-center space-x-4">
+    <Container>
+      <div className="flex items-center space-x-4 mb-10">
         <ListOrdered
           onClick={() => setView("flex")}
-          color={view === "flex" ? "red" : "black"}
+          color={view === "flex" ? "#0a9a73 " : "black"}
           className="cursor-pointer"
+          size={"35"}
         />
         <LayoutGrid
           onClick={() => setView("grid")}
-          color={view === "grid" ? "red" : "black"}
-          className="cursor-pointer"
+          color={view === "grid" ? "#0a9a73" : "black"}
+          className="cursor-pointer "
+          size={"30"}
         />
       </div>
 
-      <Container>
-        {view === "flex" ? (
-          <ProductFlex products={products} />
-        ) : (
-          <ProductGrid products={products} />
-        )}
-      </Container>
-    </div>
+      {view === "flex" ? (
+        <ProductFlex products={products} />
+      ) : (
+        <ProductGrid products={products} />
+      )}
+    </Container>
   );
 };
 

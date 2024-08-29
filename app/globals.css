@@ -16,6 +16,7 @@ body {
 .p-styles {
   @apply text-black;
 }
-.p-bold {
-  @apply text-paragraph font-bold;
+
+.social-icon {
+  @apply hover:bg-secondary_1 text-black border-border_color_7 hover:text-white  h-6 w-6 rounded-full flex items-center justify-center bg-section_bg_1 border;
 }

@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex-1">
+    <form onSubmit={handleSubmit} className="w-full flex-1">
       <FormInput
         labelValue={"Email"}
         type={"email"}

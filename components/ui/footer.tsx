@@ -5,7 +5,7 @@ import Button from "./button";
 
 const Footers = () => {
   return (
-    <Footer className="bg-section_bg_2 rounded-none pt-32 relative">
+    <Footer className="bg-section_bg_2 mt-52 rounded-none pt-32 relative">
       <div className="w-full text-white">
         <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4">
           <div>
@@ -56,7 +56,7 @@ const Footers = () => {
         </div>
       </div>
 
-      <div className="absolute -top-1/2 left-1/2  transform -translate-x-1/2 translate-y-1/2 w-3/4 mx-auto bg-secondary_1 flex justify-between p-20 gap-6">
+      <div className="hidden md:flex absolute -top-1/2 left-1/2  transform -translate-x-1/2 translate-y-1/2 w-3/4 mx-auto bg-secondary_1  justify-between p-20 gap-6">
         <p className="text-3xl font-bold font-sans tracking-wider text-white">
           Buy medical disposable face mask to protect your loved ones
         </p>

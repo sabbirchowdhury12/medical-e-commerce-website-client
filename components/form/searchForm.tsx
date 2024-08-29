@@ -55,7 +55,7 @@ const SearchForm = () => {
           id="dropdown-button"
           type="button"
           onClick={toggleDropdown}
-          className="p-2 flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-full hover:bg-gray-200 focus:ring-0 focus:outline-none"
+          className="hidden md:inline-flex p-2 flex-shrink-0 z-10  items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-full hover:bg-gray-200 focus:ring-0 focus:outline-none"
         >
           {selectedCategory}
           <svg
@@ -83,12 +83,12 @@ const SearchForm = () => {
               className="py-2 text-sm text-gray-700 "
               aria-labelledby="dropdown-button"
             >
-              {["Mockups", "Templates", "Design", "Logos"].map((category) => (
+              {["Medicine", "Equipment", "Sanitizer"].map((category) => (
                 <li key={category}>
                   <button
                     type="button"
                     onClick={() => selectCategory(category)}
-                    className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    className="font-sans inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
                     {category}
                   </button>

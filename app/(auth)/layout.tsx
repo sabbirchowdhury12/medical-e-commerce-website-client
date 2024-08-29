@@ -1,3 +1,4 @@
+import Footers from "@/components/ui/footer";
 import Navbar from "@/components/ui/navbar/navbar";
 import React from "react";
 
@@ -6,7 +7,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     <main className="">
       <Navbar />
       {children}
-      <p>Footer</p>
+      <Footers />
     </main>
   );
 };

@@ -66,7 +66,7 @@ const SideNavbar = ({ setIsOpen }: any) => {
             <Accordion.Panel key={item.title} className="border-none">
               <Accordion.Title>{item.title}</Accordion.Title>
               <>
-                {item.submenu.map((subItem) => {
+                {item?.submenu?.map((subItem) => {
                   return (
                     <Accordion.Content key={subItem.title}>
                       {subItem.title}

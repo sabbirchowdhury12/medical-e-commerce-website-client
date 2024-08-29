@@ -26,7 +26,7 @@ const TopNav: React.FC = () => {
   return (
     <nav className="border-b border-border_primary cursor-pointer ">
       <Container>
-        <FlexBetween className="fle x-col md:flex-row  text-[12px] font-bold p-2 text-paragraph gap-4 ">
+        <FlexBetween className="flex-col md:flex-row  text-[12px] font-bold p-2 text-paragraph gap-4 ">
           <FlexBox className="gap-7 ">
             <FlexBox gap="2">
               <div className="social-icon">

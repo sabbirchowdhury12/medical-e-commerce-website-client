@@ -4,7 +4,6 @@ import CustomImage from "@/components/image/customImage";
 import Container from "@/components/layout/container";
 import FlexBetween from "@/components/layout/flexBetween";
 import FlexBox from "@/components/layout/flexbox";
-import HeroBreadcrumb from "@/components/ui/heroBreadcrumb";
 import { useAppDispatch } from "@/redux/hook";
 import { updateProduct } from "@/redux/slice/counterSlice";
 
@@ -101,7 +100,6 @@ const CartClient = () => {
 
   return (
     <div>
-      <HeroBreadcrumb title={"Cart"} path={"cart"} />
       <Container>
         <FlexBox className="flex-col">
           {cartProducts.map((product) => (

@@ -55,7 +55,7 @@ const SearchForm = () => {
           id="dropdown-button"
           type="button"
           onClick={toggleDropdown}
-          className="hidden md:inline-flex p-2 flex-shrink-0 z-10  items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-full hover:bg-gray-200 focus:ring-0 focus:outline-none"
+          className="hidden md:inline-flex p-2 font-semibold flex-shrink-0 z-10  items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-full hover:bg-gray-200 focus:ring-0 focus:outline-none"
         >
           {selectedCategory}
           <svg
@@ -77,7 +77,7 @@ const SearchForm = () => {
         {dropdownVisible && (
           <div
             id="dropdown"
-            className="z-10 absolute top-14 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 "
+            className="z-10 absolute top-14 bg-white divide-y divide-gray-100  shadow-lg  w-44 "
           >
             <ul
               className="py-2 text-sm text-gray-700 "
@@ -88,7 +88,7 @@ const SearchForm = () => {
                   <button
                     type="button"
                     onClick={() => selectCategory(category)}
-                    className="font-sans inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    className="font-sans  inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
                     {category}
                   </button>

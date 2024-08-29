@@ -11,11 +11,17 @@ const MenuItems = () => {
             key={ind}
             arrowIcon={false}
             inline
-            label={<p className="uppercase">{item.title}</p>}
+            label={
+              <p className="uppercase">
+                {item.title} {item.submenu ? "+" : ""}
+              </p>
+            }
           >
             {item.submenu &&
-              item.submenu.map((subItem, ind) => {
-                return <Dropdown.Item key={ind}>{subItem.title}</Dropdown.Item>;
+              item.submenu.map((subItem, subInd) => {
+                return (
+                  <Dropdown.Item key={subInd}>{subItem.title}</Dropdown.Item>
+                );
               })}
           </Dropdown>
         );

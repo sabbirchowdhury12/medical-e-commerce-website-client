@@ -25,7 +25,6 @@ export const menu = [
   {
     title: "Service",
     path: "/service",
-    submenu: [{ title: "Home Page 01", path: "Home Page 02" }],
   },
 ];
 

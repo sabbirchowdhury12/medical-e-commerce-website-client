@@ -18,9 +18,9 @@ const SecondNav = () => {
         <FlexBox gap="4">
           <CustomImage src={Logo} alt="Logo" />
         </FlexBox>
-        <FlexBox gap="4" className="hidden md:flex text-paragraph">
+        <FlexBox gap="4" className="hidden lg:flex text-paragraph ">
           <PhoneCall size={30} />
-          <p className="text-sm">
+          <p className="text-sm font-semibold">
             Phone <br />
             +0123-456-789
           </p>
@@ -32,7 +32,11 @@ const SecondNav = () => {
         </div>
         <FlexBox gap="6" className="relative">
           <span className="relative md:hidden">
-            <Search onClick={() => setActiveSearch((prev) => !prev)} />
+            <Search
+              size={28}
+              className="text-[rgba(0,0,0,0.78)] font-bold"
+              onClick={() => setActiveSearch((prev) => !prev)}
+            />
             {activeSearch && (
               <span className="absolute top-8 right-1/2 w-40 transform translate-x-1/2">
                 <SearchForm />
@@ -40,11 +44,18 @@ const SecondNav = () => {
             )}
           </span>
           <Link href={"/login"}>
-            <CircleUserRound size={30} />
+            <div className="text-[#000000c8] font-bold">
+              <CircleUserRound size={28} />
+            </div>
           </Link>
           <Link href={"/shop/cart"}>
-            {" "}
-            <ShoppingCart size={30} />
+            <div className="text-[#000000c8] font-bold relative">
+              <ShoppingCart size={30} />
+              <span className="absolute -top-2 bg-secondary_1 rounded-full p-1 text-[10px] -right-2 text-white">
+                {" "}
+                01
+              </span>
+            </div>
           </Link>
         </FlexBox>
       </FlexBetween>

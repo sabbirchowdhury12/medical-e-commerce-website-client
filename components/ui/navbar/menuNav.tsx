@@ -2,7 +2,6 @@
 "use client";
 import React, { useState } from "react";
 import FlexBox from "../../layout/flexbox";
-import { Drawer } from "flowbite-react";
 
 import FlexBetween from "../../layout/flexBetween";
 import { MenuIcon, User } from "lucide-react";
@@ -10,16 +9,19 @@ import Container from "../../layout/container";
 
 import MenuItems from "./menu";
 import SideNavbar from "./sideNavbar";
+import Drawer from "./drawer";
 
 const MenuNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
       <FlexBox
-        className="bg-secondary_1 p-6 text-sm font-bold text-section_bg_1 uppercase hidden md:flex"
+        className="bg-secondary_1 p-6 text-sm font-bold text-section_bg_1 uppercase hidden md:flex "
         gap="16"
       >
         <MenuItems />
@@ -36,14 +38,9 @@ const MenuNav = () => {
         </FlexBetween>
       </Container>
 
-      {/* //Drawer */}
-      <Drawer
-        open={isOpen}
-        onClose={handleClose}
-        className="py-10 overflow-y-scroll"
-      >
-        <SideNavbar setIsOpen={setIsOpen} />
-      </Drawer>
+      <div>
+        <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />
+      </div>
     </>
   );
 };

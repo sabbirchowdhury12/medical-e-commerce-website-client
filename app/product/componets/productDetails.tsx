@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
 import { useParams } from "next/navigation";
-import HeroBreadcrumb from "@/components/ui/heroBreadcrumb";
 import FlexBox from "@/components/layout/flexbox";
 import Button from "@/components/ui/button";
 import { updateProduct } from "@/redux/slice/counterSlice";
@@ -13,6 +12,7 @@ import FlexBetween from "@/components/layout/flexBetween";
 import Container from "@/components/layout/container";
 import CustomModal from "@/components/ui/customModal";
 import { DropdownInput } from "@/components/form/dropdown";
+import Breadcrumbs from "@/components/ui/breadcrumb";
 
 const product = {
   _id: "01",
@@ -52,7 +52,7 @@ const ProductDetails = () => {
 
   return (
     <div className="h-screen">
-      <HeroBreadcrumb title="Product Details" path="product details" />
+      <Breadcrumbs title="Product Details" path="product details" />
 
       <Container>
         <FlexBetween className=" my-40">

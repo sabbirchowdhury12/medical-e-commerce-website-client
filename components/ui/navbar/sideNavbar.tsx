@@ -32,7 +32,9 @@ const Sidebar = ({ setIsOpen }: any) => {
       className="fixed inset-y-0 right-0 w-full sm:w-3/4 md:hidden bg-white shadow-lg z-50 p-6"
     >
       <FlexBetween className="my-20">
-        <CustomImage src={Logo} alt="Logo" className="h-10  w-32" />
+        <div className="h-10  w-28">
+          <CustomImage src={Logo} alt="Logo" className="h-full  w-full" />
+        </div>
         <button
           onClick={() => setIsOpen(false)}
           className="text-xl focus:outline-none"
@@ -47,7 +49,7 @@ const Sidebar = ({ setIsOpen }: any) => {
 
       <HR />
 
-      <CustomAccordion />
+      <CustomAccordion data={menu} />
 
       <div className="mt-6">
         {profileMenu.map((item, index) => (

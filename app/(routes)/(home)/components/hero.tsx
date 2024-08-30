@@ -2,62 +2,16 @@
 
 import FlexBetween from "@/components/layout/flexBetween";
 import FlexBox from "@/components/layout/flexbox";
-import { BadgeIcon, MenuIcon, ShoppingBag } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
-import { Carousel } from "flowbite-react";
-import Logo from "../../../../assets/logo.png";
-import Image from "next/image";
-import CustomImage from "@/components/image/customImage";
-import App from "./example2";
 import HeroCarousel from "./carousel";
+import { categories } from "@/utils/data";
+import CustomAccordion from "@/components/ui/customAccordion";
 import HeroCard from "./heroCard";
 
-const categories = [
-  {
-    title: "Health Care",
-    path: "/",
-    subCategory: [
-      {
-        title: "Health Care",
-        path: "/",
-      },
-    ],
-  },
-  {
-    title: "Health Care",
-    path: "/",
-    subCategory: [
-      {
-        title: "Health Care",
-        path: "/",
-      },
-    ],
-  },
-  {
-    title: "Health Care",
-    path: "/",
-    subCategory: [
-      {
-        title: "Health Care",
-        path: "/",
-      },
-    ],
-  },
-  {
-    title: "Health Care",
-    path: "/",
-    subCategory: [
-      {
-        title: "Health Care",
-        path: "/",
-      },
-    ],
-  },
-];
-
 const Hero = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleCategories = () => {
     setIsOpen(!isOpen);
@@ -66,11 +20,10 @@ const Hero = () => {
   return (
     <div className="">
       <div className="flex gap-6 my-10 flex-col md:flex-row">
-        <div className="category  ">
+        <div className="category">
           <span onClick={toggleCategories}>
-            <FlexBetween className="bg-secondary_1 gap-10 text-white p-6 cursor-pointer ">
+            <FlexBetween className="bg-secondary_1  md:gap-10 text-white p-6 cursor-pointer">
               <MenuIcon />
-
               <p className="text-xl font-bold ml-10">Categories</p>
             </FlexBetween>
           </span>
@@ -82,28 +35,48 @@ const Hero = () => {
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
               >
-                {categories.map((item, ind) => {
-                  return (
-                    <FlexBox
-                      className="border-2 border-t-0 border-border_primary  p-4 text-paragraph text-lg"
-                      gap="4"
-                      key={ind}
-                    >
-                      <ShoppingBag size={18} />
-                      {item.title}
-                    </FlexBox>
-                  );
-                })}
+                <div className="md:hidden">
+                  <CustomAccordion data={categories} />
+                </div>
+                <div className="hidden md:block">
+                  {categories.map((item, ind) => {
+                    return (
+                      <FlexBox
+                        className="group relative border-b-2 border-x-2 border-border_primary font-bold p-4 text-black text-lg font-mono bg-section_bg_1"
+                        gap="4"
+                        key={ind}
+                      >
+                        {item.title}
+                        <motion.div
+                          className="sub-category hidden w-72 text-center bg-white text-black absolute left-full top-0 group-hover:flex flex-col mt-0 p-4 shadow-lg z-50  group-hover:opacity-100 "
+                          initial={{ x: -50, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: -10, opacity: 0 }}
+                          transition={{ duration: 0.5, ease: "easeInOut" }}
+                        >
+                          {item?.submenu.map((subItem) => (
+                            <div
+                              className="p-4 text-sm uppercase cursor-pointer hover:bg-section_bg_1"
+                              key={subItem.title}
+                            >
+                              <p>{subItem.title}</p>
+                            </div>
+                          ))}
+                        </motion.div>
+                      </FlexBox>
+                    );
+                  })}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-        <div className="banner  flex-1">
+        <div className="banner flex-1">
           <HeroCarousel />
         </div>
       </div>
 
-      {/* <HeroCard /> */}
+      <HeroCard />
     </div>
   );
 };

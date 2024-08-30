@@ -3,8 +3,7 @@ import FlexBetween from "@/components/layout/flexBetween";
 import FlexBox from "@/components/layout/flexbox";
 import Button from "@/components/ui/button";
 import { Modal } from "flowbite-react";
-import { motion } from "framer-motion";
-import { BookOpenCheckIcon, CircleCheck } from "lucide-react";
+import { CircleCheck } from "lucide-react";
 
 type ModalProps = {
   openModal?: boolean;
@@ -32,11 +31,11 @@ const CustomModal: React.FC<ModalProps> = ({
     >
       <Modal.Header />
       <FlexBetween className="pt-10 pb-20 gap-10 font-sans">
-        <div className="">
+        <div className="h-28 w-28">
           <CustomImage
             src={product.photos[0]}
             alt=""
-            className="h-28 w-28 bg-section_bg_1 "
+            className="h-full w-full bg-section_bg_1 "
           />
         </div>
         <div className="flex-1">

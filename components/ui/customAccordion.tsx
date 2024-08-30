@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import { menu } from "@/utils/data";
 import { motion, AnimatePresence } from "framer-motion";
 
-const CustomAccordion = () => {
+const CustomAccordion = ({ data }: any) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {
@@ -12,7 +11,7 @@ const CustomAccordion = () => {
 
   return (
     <div>
-      {menu.map((item, index) => (
+      {data?.map((item: any, index: number) => (
         <div key={index}>
           <button
             onClick={() => toggleAccordion(index)}
@@ -30,10 +29,10 @@ const CustomAccordion = () => {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="overflow-hidden pl-4"
               >
-                {item.submenu.map((subItem, subIndex) => (
+                {item.submenu.map((subItem: any, subIndex: any) => (
                   <div
                     key={subIndex}
-                    className="py-4 pl-4 border-b border-border_color_7 hover:bg-gray-100 rounded-lg"
+                    className="py-4 pl-4 border-b border-border_color_7 hover:bg-gray-100 "
                   >
                     {subItem.title}
                   </div>

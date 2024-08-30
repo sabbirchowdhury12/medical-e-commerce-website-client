@@ -3,7 +3,9 @@
 import FormInput from "@/components/form/formInput";
 import Button from "@/components/ui/button";
 import { useUserRegisterMutation } from "@/redux/api/authApi";
+import { setAccessToLocalStorage, setUserToLocalStorage } from "@/service/auth";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -16,34 +18,39 @@ const getFormData = (
 
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const [userRegister] = useUserRegisterMutation();
   const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = getFormData(e.currentTarget);
+    const formData = getFormData(e.currentTarget);
 
-    const password = data.password as string;
-    const confirmPassword = data.confirmPassword as string;
+    const password = formData.password as string;
+    const confirmPassword = formData.confirmPassword as string;
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    delete data.confirmPassword;
+    delete formData.confirmPassword;
 
-    const res: any = await userRegister(data);
+    const { data } = await userRegister(formData);
 
-    if (res && res?.data?.data?.accessToken) {
+    console.log(data);
+    if (data && data?.data?.accessToken) {
       toast.success("Register  successfully!");
+      router.push("/");
+      setAccessToLocalStorage(data?.data?.accessToken);
+      setUserToLocalStorage(data?.data?.user);
     } else {
       toast.error("something went wrong. please try later.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex-1 md:w-3/4 mx-auto">
+    <form onSubmit={handleSubmit} className="flex-1 md:w-3/4 mx-auto mb-20">
       <FormInput
         labelValue={"Name"}
         type={"text"}

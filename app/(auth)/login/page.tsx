@@ -7,6 +7,7 @@ import FlexBox from "@/components/layout/flexbox";
 import Button from "@/components/ui/button";
 import Container from "@/components/layout/container";
 import Breadcrumbs from "@/components/ui/breadcrumb";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -25,12 +26,14 @@ Sit aliquid, Non distinctio vel iste.
           <LoginForm />
 
           <FlexBox className="flex-col  text-center w-full md:w-2/5" gap="4">
-            <p className="font-bold">DONT HAVE AN ACCOUNT?</p>
+            <p className="font-bold">Dont Have an Account?</p>
             <p className="text-paragraph">
-              Add items to your wishlistget personalised recommendations check
-              out more quickly track your orders register
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              repellendus.
             </p>
-            <Button> Register</Button>
+            <Link href={"/register"}>
+              <Button> Register</Button>
+            </Link>
           </FlexBox>
         </FlexBetween>
       </Container>

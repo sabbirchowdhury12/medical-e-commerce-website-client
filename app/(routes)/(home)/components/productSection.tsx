@@ -1,33 +1,13 @@
 "use client";
-import FlexBetween from "@/components/layout/flexBetween";
+
 import FlexBox from "@/components/layout/flexbox";
 import Heading from "@/components/ui/heading";
-import { HR } from "flowbite-react";
 import React, { useState } from "react";
-import Product from "./product";
-import Button from "@/components/ui/button";
 import { useGetAllProductQuery } from "@/redux/api/productApi";
-import Loader from "@/components/loding";
 import ProductGrid from "@/components/ui/productGrid";
+import { motion } from "framer-motion";
+import { Category } from "@/utils/data";
 
-const Category = [
-  {
-    title: "Medicine",
-    path: "medicine",
-  },
-  {
-    title: "Safety Suite",
-    path: "safty",
-  },
-  {
-    title: "Equipment",
-    path: "equipment",
-  },
-  {
-    title: "Hygicinic",
-    path: "hygicinic",
-  },
-];
 const products = [
   {
     _id: "01",
@@ -78,6 +58,12 @@ const products = [
     updatedAt: new Date(),
   },
 ];
+
+const tabVariants = {
+  initial: { opacity: 0.5, scale: 0.95 },
+  animate: { opacity: 1, scale: 1 },
+};
+
 const ProductSection = () => {
   const [category, setCategory] = useState("");
 
@@ -92,22 +78,30 @@ const ProductSection = () => {
         title="Our Products"
         sub_title="A highly efficient slip-ring scanner for today's diagnostic requirements."
       />
-      <FlexBox className="flex-wrap my-10" gap="8">
-        {" "}
-        {Category.map((item) => {
-          return (
-            <FlexBox key={item.title} className="w-52 cursor-pointer">
+
+      <FlexBox className="flex-wrap my-14 gap-8">
+        {Category.map((item) => (
+          <motion.div
+            key={item.title}
+            initial="initial" // Use the variant label
+            animate={category === item.title ? "animate" : "initial"}
+            variants={tabVariants}
+            transition={{ duration: 0.3, ease: "easeInOut" }} // You can directly define transition here
+          >
+            <FlexBox className="w-52 cursor-pointer text-center bg-section_bg_1 p-2 rounded">
               <p
                 onClick={() => setCategory(item.title)}
-                className={`text-xl font-bold text-center text-wrap border-r-2 pr-16 font-sans ${
-                  category === item.title ? "text-secondary_1 " : "text-black"
+                className={`uppercase text-lg font-bold text-wrap text-center pb-4 font-sans ${
+                  category === item.title
+                    ? "text-secondary_1 border-b"
+                    : "text-black"
                 }`}
               >
                 {item.title}
               </p>
             </FlexBox>
-          );
-        })}
+          </motion.div>
+        ))}
       </FlexBox>
 
       {/* product card  */}

@@ -1,11 +1,11 @@
 import React from "react";
 import ProductClient from "./componets/productClient";
-import HeroBreadcrumb from "@/components/ui/heroBreadcrumb";
+import Breadcrumbs from "@/components/ui/breadcrumb";
 
 const ProductPage = () => {
   return (
     <>
-      <HeroBreadcrumb title={"shop"} path={"shop"} />
+      <Breadcrumbs title={"shop"} path={"shop"} />
       <ProductClient />;
     </>
   );

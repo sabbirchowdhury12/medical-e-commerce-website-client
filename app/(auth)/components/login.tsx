@@ -3,6 +3,12 @@
 import FormInput from "@/components/form/formInput";
 import Button from "@/components/ui/button";
 import { useUserLoginMutation } from "@/redux/api/authApi";
+import {
+  setAccessToLocalStorag,
+  setAccessToLocalStorage,
+  setUserToLocalStorag,
+  setUserToLocalStorage,
+} from "@/service/auth";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -25,14 +31,15 @@ const LoginForm: React.FC = () => {
     setLoading(true);
 
     e.preventDefault();
-    const data = getFormData(e.currentTarget);
+    const formData = getFormData(e.currentTarget);
 
-    const res: any = await userLogin(data);
-    console.log(res);
-    if (res && res?.data?.accessToken) {
+    const { data } = await userLogin(formData);
+
+    if (data && data?.accessToken) {
       toast.success("Login in successfully!");
-      // storeUserInfo(res?.data?.accessToken);
       router.push("/");
+      setAccessToLocalStorage(data?.data?.accessToken);
+      setUserToLocalStorage(data?.data?.user);
     } else {
       toast.error("login failed. please try later");
     }

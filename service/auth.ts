@@ -1,13 +1,37 @@
-export const storeTOLocalStorage = (name: string, data: any) => {
-  localStorage.setItem(name, data);
+// import jwt from 'jsonwebtoken';
+
+// export const decodeToken = (token: string): any => {
+//   try {
+//     // Decode the token without verifying the signature
+//     const decoded = jwt.decode(token);
+
+//     // Return the decoded token payload
+//     return decoded;
+//   } catch (error) {
+//     console.error('Error decoding token:', error);
+//     return null;
+//   }
+// };
+
+export const setUserToLocalStorage = (user: any) => {
+  localStorage.setItem("e-commerce_User", JSON.stringify(user));
+};
+export const setAccessToLocalStorage = (token: string) => {
+  localStorage.setItem("accessToken", JSON.stringify(token));
 };
 
-export const getFromStorage = (name: string) => {
+export const getUserFromStorage = (): any => {
   if (typeof window !== "undefined") {
-    const data = localStorage.getItem(name);
-    if (data) {
-      const cartProducts = JSON.parse(data);
-      return cartProducts;
+    const item = localStorage.getItem("e-commerce_User");
+    if (item) {
+      try {
+        return JSON.parse(item);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        return null;
+      }
     }
+    return null;
   }
+  return null;
 };

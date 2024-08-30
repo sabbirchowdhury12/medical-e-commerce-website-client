@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import CustomImage from "../image/customImage";
 import CustomModal from "./customModal";
 import ProductIcon from "../productIcon";
+import { Button, Modal } from "flowbite-react";
 
 const ProductGrid = ({ products }: any) => {
   const [openModal, setOpenModal] = useState(false);
@@ -40,7 +41,7 @@ const ProductGrid = ({ products }: any) => {
             boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.15)",
           }}
           transition={{ duration: 0.3 }}
-          className="group border-4  border-border_color_8 p-8 text-center relative"
+          className="group border  border-border_color_7 p-8 text-center relative"
         >
           <CustomImage
             src={product.photos[0]}
@@ -63,18 +64,18 @@ const ProductGrid = ({ products }: any) => {
               handleWishlist={handleWishlist}
             />
           </div>
-
-          {openModal && (
-            <CustomModal
-              openModal={openModal}
-              setOpenModal={setOpenModal}
-              message={message}
-              button={button}
-              product={currentProduct}
-            />
-          )}
         </motion.div>
       ))}
+
+      {openModal && (
+        <CustomModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          message={message}
+          button={button}
+          product={currentProduct}
+        />
+      )}
     </div>
   );
 };

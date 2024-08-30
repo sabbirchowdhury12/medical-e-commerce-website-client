@@ -1,5 +1,4 @@
 import { Checkbox, Label, TextInput } from "flowbite-react";
-import HeroBreadcrumb from "@/components/ui/heroBreadcrumb";
 import React from "react";
 import FormInput from "@/components/form/formInput";
 import Heading from "@/components/ui/heading";
@@ -9,14 +8,14 @@ import FlexBox from "@/components/layout/flexbox";
 import Button from "@/components/ui/button";
 import Container from "@/components/layout/container";
 import RegisterForm from "../components/register";
+import Breadcrumbs from "@/components/ui/breadcrumb";
 
 const RegisterPage = () => {
   return (
     <div>
-      <HeroBreadcrumb title={"register"} path={"register"} />
+      <Breadcrumbs title={"register"} path={"register"} />
       <Heading
-        title="Sign In 
-To Your Account"
+        title="Create Account"
         sub_title="Lorem ipsum dolor, sit amet consectetur adipisicing elit.
 Sit aliquid, Non distinctio vel iste.
 
@@ -27,10 +26,10 @@ Sit aliquid, Non distinctio vel iste.
           <RegisterForm />
 
           <FlexBox className="flex-col md:w-1/2 text-center" gap="4">
-            <p> HAVE AN ACCOUNT?</p>
-            <p>
-              Add items to your wishlistget personalised recommendations check
-              out more quickly track your orders register
+            <p className="font-bold">Already Have a Account</p>
+            <p className="text-paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              repellendus.
             </p>
             <Button> Login</Button>
           </FlexBox>

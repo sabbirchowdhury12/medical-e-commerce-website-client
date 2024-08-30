@@ -50,3 +50,106 @@ export const heroCard = [
     img: heroCardImg4,
   },
 ];
+
+export const categories = [
+  {
+    title: "Medicine",
+    path: "/",
+    submenu: [
+      {
+        title: "Pain Killer",
+        path: "/pain-killer",
+      },
+      {
+        title: "Gastic",
+        path: "/gastic",
+      },
+      {
+        title: "Diabetic",
+        path: "/diabetic",
+      },
+    ],
+  },
+  {
+    title: "Equipment",
+    path: "/",
+    submenu: [
+      {
+        title: "sergical product",
+        path: "/sergical-product",
+      },
+      {
+        title: "Frist Aid",
+        path: "/frist-aid",
+      },
+      {
+        title: "Device ",
+        path: "/device",
+      },
+    ],
+  },
+  {
+    title: "Safety suits",
+    path: "/",
+    submenu: [
+      {
+        title: "Mask",
+        path: "/",
+      },
+      {
+        title: "PPI",
+        path: "/",
+      },
+    ],
+  },
+  {
+    title: "Hygicinic",
+    path: "/",
+    submenu: [
+      {
+        title: "Sanitizer",
+        path: "/",
+      },
+    ],
+  },
+];
+
+export const carouselItems = [
+  {
+    src: "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/slider/61.jpg",
+    alt: "Medicine Image 1",
+    title: "Your Health, Our Priority",
+    subtitle: "Explore our wide range of medicines",
+  },
+  {
+    src: "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/product-2/11.png",
+    alt: "Medicine Image 2",
+    title: "Trusted by Professionals",
+    subtitle: "Quality medicines at your doorstep",
+  },
+  {
+    src: "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/slider/61.jpg",
+    alt: "Medicine Image 3",
+    title: "Affordable Healthcare",
+    subtitle: "We care about your well-being",
+  },
+];
+
+export const Category = [
+  {
+    title: "Medicine",
+    path: "medicine",
+  },
+  {
+    title: "Safety Suite",
+    path: "safty",
+  },
+  {
+    title: "Equipment",
+    path: "equipment",
+  },
+  {
+    title: "Hygicinic",
+    path: "hygicinic",
+  },
+];

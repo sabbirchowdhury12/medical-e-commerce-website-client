@@ -16,7 +16,7 @@ const ProductIcon: React.FC<ProductIconProps> = ({
 }) => {
   return (
     <>
-      <Link href={`/product/details/${id}`}>
+      <Link href={`/shop/product/details/${id}`}>
         <div className="w-12 flex justify-center items-center border-r-2 h-12 text-center border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white">
           <EyeIcon />
         </div>

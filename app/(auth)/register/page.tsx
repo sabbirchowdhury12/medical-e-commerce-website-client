@@ -9,6 +9,7 @@ import Button from "@/components/ui/button";
 import Container from "@/components/layout/container";
 import RegisterForm from "../components/register";
 import Breadcrumbs from "@/components/ui/breadcrumb";
+import Link from "next/link";
 
 const RegisterPage = () => {
   return (
@@ -31,7 +32,9 @@ Sit aliquid, Non distinctio vel iste.
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
               repellendus.
             </p>
-            <Button> Login</Button>
+            <Link href={"/login"}>
+              <Button> Login</Button>
+            </Link>
           </FlexBox>
         </FlexBetween>
       </Container>

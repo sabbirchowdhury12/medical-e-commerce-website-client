@@ -7,6 +7,7 @@ import { useGetAllProductQuery } from "@/redux/api/productApi";
 import ProductGrid from "@/components/ui/productGrid";
 import { motion } from "framer-motion";
 import { Category } from "@/utils/data";
+import Loader from "@/components/loding";
 
 const products = [
   {
@@ -69,9 +70,9 @@ const ProductSection = () => {
 
   const { data, error, isLoading } = useGetAllProductQuery({});
 
-  // if (isLoading) {
-  //   return <Loader />;
-  // }
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section>
       <Heading
@@ -106,7 +107,7 @@ const ProductSection = () => {
 
       {/* product card  */}
 
-      <ProductGrid products={products} />
+      <ProductGrid products={data?.data} />
     </section>
   );
 };

@@ -39,10 +39,10 @@ const ProductFlex = ({ products }: any) => {
           className="group border-4 hover:shadow-lg  border-border_color_8 p-8 text-center relative"
         >
           <FlexBetween className="flex-col md:flex-row">
-            <div>
+            <div className="h-36 w-36">
               <CustomImage
                 src={product.photos[0]}
-                className="h-36 w-36"
+                className="h-full w-full"
                 alt={product.slug}
               />
             </div>

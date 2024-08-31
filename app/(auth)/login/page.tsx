@@ -22,7 +22,7 @@ Sit aliquid, Non distinctio vel iste.
 "
       />
       <Container>
-        <FlexBetween className="flex-col md:flex-row gap-12">
+        <FlexBetween className="flex-col ">
           <LoginForm />
 
           <FlexBox className="flex-col  text-center w-full md:w-2/5" gap="4">

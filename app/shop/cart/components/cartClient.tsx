@@ -6,6 +6,14 @@ import FlexBetween from "@/components/layout/flexBetween";
 import FlexBox from "@/components/layout/flexbox";
 import { useAppDispatch } from "@/redux/hook";
 import { updateProduct } from "@/redux/slice/counterSlice";
+import { CartTable } from "./cartTable";
+import {
+  useGetAllProductQuery,
+  useGetSingleProductQuery,
+} from "@/redux/api/productApi";
+import Loader from "@/components/loding";
+import Button from "@/components/ui/button";
+import Link from "next/link";
 
 const products = [
   {
@@ -59,92 +67,22 @@ const products = [
 ];
 
 const CartClient = () => {
-  const [cartProducts, setCartProducts] = useState<
-    ((typeof products)[0] & { quantity: number })[]
-  >([]);
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedCart = localStorage.getItem("Medicine-Cart");
-      if (storedCart) {
-        const parsedCart = JSON.parse(storedCart);
-        const filteredProducts = products
-          .filter((product) =>
-            parsedCart.some(
-              (cartItem: { productId: string }) =>
-                cartItem.productId === product._id
-            )
-          )
-          .map((product) => ({
-            ...product,
-            quantity:
-              parsedCart.find(
-                (cartItem: any) => cartItem.productId === product._id
-              )?.quantity || 1,
-          }));
-        setCartProducts(filteredProducts);
-      }
-    }
-  }, []);
-
-  const handleQuantityChange = (productId: string, quantity: number) => {
-    dispatch(updateProduct({ id: productId, quantity }));
-    setCartProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product._id === productId ? { ...product, quantity } : product
-      )
-    );
-  };
+  const { data } = useGetAllProductQuery({});
+  if (!data?.data) {
+    return <Loader />;
+  }
 
   return (
-    <div>
-      <Container>
-        <FlexBox className="flex-col">
-          {cartProducts.map((product) => (
-            <FlexBetween className="w-full" key={product._id}>
-              <button>x</button>
-              <div className="h-24 w-24">
-                <CustomImage
-                  className="h-full w-full"
-                  src={product?.photos[0]}
-                  alt=""
-                />
-              </div>
-              <h2>{product.name}</h2>
-              <p>Price: {product.defaultPrice}</p>
-
-              <FlexBox>
-                <div
-                  onClick={() =>
-                    handleQuantityChange(
-                      product._id,
-                      product.quantity > 1 ? product.quantity - 1 : 1
-                    )
-                  }
-                  className="border border-border_color_7 p-6 font-bold text-paragraph text-lg cursor-pointer"
-                >
-                  -
-                </div>
-                <div className="border border-border_color_7 p-6 font-bold text-paragraph text-lg">
-                  {product.quantity}
-                </div>
-                <div
-                  onClick={() =>
-                    handleQuantityChange(product._id, product.quantity + 1)
-                  }
-                  className="border border-border_color_7 p-6 font-bold text-paragraph text-lg cursor-pointer"
-                >
-                  +
-                </div>
-              </FlexBox>
-              <p>Total: {product.defaultPrice * product.quantity}</p>
-            </FlexBetween>
-          ))}
-        </FlexBox>
-      </Container>
-    </div>
+    <Container>
+      <CartTable products={data?.data} />
+      <Link
+        href={"/shop/checkout"}
+        className="mt-10   flex items-end
+       justify-end "
+      >
+        <Button> Checkout</Button>
+      </Link>
+    </Container>
   );
 };
 

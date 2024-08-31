@@ -1,6 +1,5 @@
 "use client";
 import Container from "@/components/layout/container";
-import HeroBreadcrumb from "@/components/ui/heroBreadcrumb";
 import ProductFlex from "@/components/ui/productFlex";
 import ProductGrid from "@/components/ui/productGrid";
 import { LayoutGrid, ListOrdered } from "lucide-react";
@@ -58,20 +57,20 @@ const products = [
 ];
 
 const ProductClient = () => {
-  const [view, setView] = useState<"flex" | "grid">("grid");
+  const [view, setView] = useState<"flex" | "grid">("flex");
   return (
     <Container>
       <div className="flex items-center space-x-4 mb-10">
         <ListOrdered
           onClick={() => setView("flex")}
-          color={view === "flex" ? "#0a9a73 " : "black"}
+          color={view === "flex" ? "#0a9a73 " : "#5c727d"}
           className="cursor-pointer"
           size={"35"}
         />
         <LayoutGrid
           onClick={() => setView("grid")}
-          color={view === "grid" ? "#0a9a73" : "black"}
-          className="cursor-pointer "
+          color={view === "grid" ? "#0a9a73" : "#5c727d"}
+          className="cursor-pointer text-paragraph"
           size={"30"}
         />
       </div>

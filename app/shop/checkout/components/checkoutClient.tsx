@@ -2,26 +2,23 @@
 import { DropdownInput } from "@/components/form/dropdown";
 import FormInput from "@/components/form/formInput";
 import RadioInput from "@/components/form/radioInput";
-import CustomImage from "@/components/image/customImage";
 import Container from "@/components/layout/container";
 import FlexBetween from "@/components/layout/flexBetween";
-import FlexBox from "@/components/layout/flexbox";
 import Button from "@/components/ui/button";
-import { HR } from "flowbite-react";
 import { useEffect, useState } from "react";
 import CartProduct from "./cartProduct";
+import { District, Division } from "@/type/common";
+import { useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
+import { useCreateOrderMutation } from "@/redux/api/orderApi";
+import toast from "react-hot-toast";
 
-interface Division {
-  division: string;
-  divisionbn: string;
-  coordinates: string;
-}
-
-interface District {
-  district: string;
-  coordinates: string;
-  upazilla: string[];
-}
+const getFormData = (
+  form: HTMLFormElement
+): Record<string, FormDataEntryValue> => {
+  const formData = new FormData(form);
+  return Object.fromEntries(formData.entries());
+};
 
 const CheckoutClient = ({ products }: any) => {
   const [divisions, setDivisions] = useState<Division[]>([]);
@@ -31,6 +28,9 @@ const CheckoutClient = ({ products }: any) => {
   const [selectedDivision, setSelectedDivision] = useState<string>("");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("");
   const [selectedUpazilla, setSelectedUpazilla] = useState<string>("");
+  const [totalPrice, setTotalPrice] = useState<string>("");
+
+  const user = useAppSelector((state: RootState) => state.auth.user);
 
   const [cartProducts, setCartProducts] = useState<
     ((typeof products)[0] & { quantity: number })[]
@@ -38,6 +38,7 @@ const CheckoutClient = ({ products }: any) => {
 
   console.log(products);
 
+  // hooks
   useEffect(() => {
     // Fetch divisions from the API
     const fetchDivisions = async () => {
@@ -84,14 +85,55 @@ const CheckoutClient = ({ products }: any) => {
     }
   }, [selectedDistrict, districts]);
 
-  const handleOrder = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log("Selected Division:", selectedDivision);
-    console.log("Selected District:", selectedDistrict);
-    console.log("Selected Upazilla:", selectedUpazilla);
+  const [createOrder] = useCreateOrderMutation();
 
-    // I need here name , email , phone number, company name, adress all data and payment data and total price and product id with qauntiy  do it submit with proper validation
+  const handleOrder = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const orderedProducts = cartProducts.map((product) => ({
+      product: product._id,
+      quantity: product.quantity,
+      price: product.defaultPrice * product.quantity,
+    }));
+
+    const formData = getFormData(e.currentTarget);
+
+    const orderData = {
+      user: user?.id,
+      items: orderedProducts,
+      totalAmount: totalPrice,
+      shippingAddress: {
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        companyName: formData.companyName,
+        division: formData.division,
+        district: formData.district,
+        upazilla: formData.upazilla,
+        roadNo: formData.companyName,
+        houseNo: formData.companyName,
+      },
+
+      paymentInfo: {
+        method: formData.paymentMethod,
+        status: "Pending",
+      },
+    };
+    try {
+      console.log(orderData);
+      const { data } = await createOrder(orderData).unwrap();
+      toast.success("orderdone");
+      console.log(data);
+    } catch (error) {
+      toast.error("Login failed. Please try again.");
+    }
   };
+
+  // const clearCart = () => {
+  //   // Logic to clear the cart (e.g., updating state, local storage, etc.)
+  //   dispatch(clearCartAction()); // Assuming you're using Redux or another state management library
+  // };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("Medicine-Cart");
@@ -119,8 +161,10 @@ const CheckoutClient = ({ products }: any) => {
   return (
     <Container>
       <form onSubmit={handleOrder}>
-        <div className="border border-border_color_7 p-10">
-          <h2 className="text-2xl font-bold ">Billing Address</h2>
+        <div className="border border-border_color_7 p-2 md:p-10">
+          <h2 className=" text-lg md:text-2xl font-bold pt-6 m">
+            Billing Address
+          </h2>
 
           <h2 className="h4-styles">Personal Information</h2>
 
@@ -149,18 +193,19 @@ const CheckoutClient = ({ products }: any) => {
             <FormInput
               labelValue=""
               type="text"
-              placeholder="Enter your company name"
+              placeholder="Enter your company name or local address"
               name="companyName"
             />
           </FlexBetween>
 
           <h2 className="h4-styles">Address</h2>
-          <FlexBetween className="gap-4 flex-col md:flex-row">
+          <FlexBetween className="gap-4 flex-col  md:flex-row">
             <DropdownInput
               label="Division"
               value={selectedDivision}
               items={divisions.map((div) => div.division)}
               onChange={(value) => setSelectedDivision(value)}
+              name="division"
             />
             <DropdownInput
               label="District"
@@ -168,6 +213,7 @@ const CheckoutClient = ({ products }: any) => {
               items={districts.map((dist) => dist.district)}
               onChange={(value) => setSelectedDistrict(value)}
               disabled={!selectedDivision}
+              name={"district"}
             />
             <DropdownInput
               label="Upazilla"
@@ -175,6 +221,7 @@ const CheckoutClient = ({ products }: any) => {
               items={upazillas}
               onChange={(value) => setSelectedUpazilla(value)}
               disabled={!selectedDistrict}
+              name="upazilla"
             />
           </FlexBetween>
 
@@ -183,13 +230,13 @@ const CheckoutClient = ({ products }: any) => {
               labelValue=""
               type="text"
               placeholder="Road number"
-              name="roadNumber"
+              name="roadNo"
             />
             <FormInput
               labelValue=""
-              type="tel"
+              type="text"
               placeholder="House number or village name"
-              name="houseNumber "
+              name="houseNo "
             />
           </FlexBetween>
         </div>
@@ -197,8 +244,16 @@ const CheckoutClient = ({ products }: any) => {
         <FlexBetween className="flex-col md:flex-row gap-6 my-20 items-start">
           <div className="flex-1 w-full">
             <p className="h4-styles">payment Method</p>
-            <RadioInput value={"cash"} label={"Cash On Delivery"} />
-            <RadioInput value={"online"} label={"Online Paynment"} />
+            <RadioInput
+              value={"Cash"}
+              label={"Cash On Delivery"}
+              name="paymentMethod"
+            />
+            <RadioInput
+              value={"Online"}
+              label={"Online Paynment"}
+              name="paymentMethod"
+            />
             <p className="text-paragraph my-4 tracking-wider text-sm leading-6">
               {" "}
               Your personal data will be used to process your order, support
@@ -208,7 +263,10 @@ const CheckoutClient = ({ products }: any) => {
 
             <Button type="submit">Place Order</Button>
           </div>
-          <CartProduct cartProducts={cartProducts} />
+          <CartProduct
+            setTotalPrice={setTotalPrice}
+            cartProducts={cartProducts}
+          />
         </FlexBetween>
       </form>
     </Container>

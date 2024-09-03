@@ -11,7 +11,7 @@ body {
 }
 
 .h4-styles {
-  @apply text-lg font-bold  my-6  border-l-4 pl-4 border-secondary_1  capitalize;
+  @apply md:text-lg font-bold  my-6  border-l-4 pl-4 border-secondary_1  capitalize;
 }
 .p-styles {
   @apply text-black;

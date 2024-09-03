@@ -14,11 +14,23 @@ export interface IProduct {
   company: string;
   discount: number;
   stockStatus: boolean;
-  status: string;
   categoryId: string;
   categoryName: string;
+  subCategory: string;
   variants: IVariant[];
   defaultPrice: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface Division {
+  division: string;
+  divisionbn: string;
+  coordinates: string;
+}
+
+export interface District {
+  district: string;
+  coordinates: string;
+  upazilla: string[];
 }

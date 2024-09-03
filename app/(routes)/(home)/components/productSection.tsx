@@ -3,11 +3,15 @@
 import FlexBox from "@/components/layout/flexbox";
 import Heading from "@/components/ui/heading";
 import React, { useState } from "react";
-import { useGetAllProductQuery } from "@/redux/api/productApi";
+import {
+  useGetAllProductQuery,
+  useGetCategoryProductQuery,
+} from "@/redux/api/productApi";
 import ProductGrid from "@/components/ui/productGrid";
 import { motion } from "framer-motion";
 import { Category } from "@/utils/data";
 import Loader from "@/components/loding";
+import { useGetAllCategoryQuery } from "@/redux/api/categoriesApi";
 
 const products = [
   {
@@ -66,9 +70,10 @@ const tabVariants = {
 };
 
 const ProductSection = () => {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("66d450356cf4765035d630b2");
 
-  const { data, error, isLoading } = useGetAllProductQuery({});
+  const { data: categories } = useGetAllCategoryQuery({});
+  const { data, error, isLoading } = useGetCategoryProductQuery(category);
 
   if (isLoading) {
     return <Loader />;
@@ -81,24 +86,24 @@ const ProductSection = () => {
       />
 
       <FlexBox className="flex-wrap my-14 gap-8">
-        {Category.map((item) => (
+        {categories?.data?.map((item: any) => (
           <motion.div
-            key={item.title}
+            key={item._id}
             initial="initial" // Use the variant label
-            animate={category === item.title ? "animate" : "initial"}
+            animate={category === item._id ? "animate" : "initial"}
             variants={tabVariants}
             transition={{ duration: 0.3, ease: "easeInOut" }} // You can directly define transition here
           >
             <FlexBox className="w-52 cursor-pointer text-center bg-section_bg_1 p-2 rounded">
               <p
-                onClick={() => setCategory(item.title)}
+                onClick={() => setCategory(item._id)}
                 className={`uppercase text-lg font-bold text-wrap text-center pb-4 font-sans ${
-                  category === item.title
+                  category === item._id
                     ? "text-secondary_1 border-b"
                     : "text-black"
                 }`}
               >
-                {item.title}
+                {item.name}
               </p>
             </FlexBox>
           </motion.div>

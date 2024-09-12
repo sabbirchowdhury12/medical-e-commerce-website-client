@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { Category } from "@/utils/data";
 import Loader from "@/components/loding";
 import { useGetAllCategoryQuery } from "@/redux/api/categoriesApi";
+import { CardLoaderPage } from "@/components/cardLoader";
 
 const products = [
   {
@@ -76,7 +77,7 @@ const ProductSection = () => {
   const { data, error, isLoading } = useGetCategoryProductQuery(category);
 
   if (isLoading) {
-    return <Loader />;
+    return <CardLoaderPage />;
   }
   return (
     <section>

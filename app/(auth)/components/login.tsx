@@ -5,18 +5,14 @@ import Button from "@/components/ui/button";
 import { useUserLoginMutation } from "@/redux/api/authApi";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 import { setCredentials } from "@/redux/slice/authSlice";
 import { jwtDecode } from "jwt-decode";
-
-interface DecodedToken {
-  id: string;
-  role: string;
-  // Add any other properties you expect to be in the token
-}
+import { DecodedToken } from "@/type/common";
+import { getUserFromStorage } from "@/service/auth";
 
 const getFormData = (
   form: HTMLFormElement
@@ -32,6 +28,13 @@ const LoginForm: React.FC = () => {
 
   const [userLogin] = useUserLoginMutation();
 
+  useEffect(() => {
+    const user = getUserFromStorage();
+    if (user) {
+      router.push("/");
+    }
+  }, [router]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
 
@@ -42,22 +45,17 @@ const LoginForm: React.FC = () => {
       const { data } = await userLogin(formData).unwrap();
 
       if (data && data.accessToken) {
-        const { accessToken } = data;
+        const { accessToken, user } = data;
 
-        // Save token in localStorage
         localStorage.setItem("token", accessToken);
-
-        // Decode token to get user information
         const decodedToken = jwtDecode<DecodedToken>(accessToken);
-
-        // Save user data and token in Redux state
         dispatch(
           setCredentials({
-            user: { id: decodedToken.id, role: decodedToken.role },
+            decodedUser: { id: decodedToken.id, role: decodedToken.role },
             token: accessToken,
+            user: user,
           })
         );
-
         toast.success("Login successfully!");
         router.push("/");
       } else {

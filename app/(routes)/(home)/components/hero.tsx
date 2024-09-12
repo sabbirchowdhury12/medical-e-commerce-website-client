@@ -9,6 +9,7 @@ import HeroCarousel from "./carousel";
 import { categories } from "@/utils/data";
 import CustomAccordion from "@/components/ui/customAccordion";
 import HeroCard from "./heroCard";
+import Link from "next/link";
 
 const Hero = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -55,12 +56,13 @@ const Hero = () => {
                           transition={{ duration: 0.5, ease: "easeInOut" }}
                         >
                           {item?.submenu.map((subItem) => (
-                            <div
+                            <Link
+                              href={subItem.path}
                               className="p-4 text-sm uppercase cursor-pointer hover:bg-section_bg_1"
                               key={subItem.title}
                             >
-                              <p>{subItem.title}</p>
-                            </div>
+                              <p className="cursor-pointer">{subItem.title}</p>
+                            </Link>
                           ))}
                         </motion.div>
                       </FlexBox>

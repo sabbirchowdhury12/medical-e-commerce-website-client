@@ -1,15 +1,9 @@
 "use client";
-import FlexBox from "@/components/layout/flexbox";
-import { Button, Modal } from "flowbite-react";
+
 import { motion } from "framer-motion";
-import {
-  EyeIcon,
-  HardDriveUploadIcon,
-  Heart,
-  ShoppingCart,
-} from "lucide-react";
+import { EyeIcon, Heart, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import path from "path";
+
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
 import { increment } from "@/redux/slice/counterSlice";

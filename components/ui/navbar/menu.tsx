@@ -1,5 +1,6 @@
 import { menu } from "@/utils/data";
 import { Dropdown } from "flowbite-react";
+import Link from "next/link";
 import React from "react";
 
 const MenuItems = () => {
@@ -20,7 +21,9 @@ const MenuItems = () => {
             {item.submenu &&
               item.submenu.map((subItem, subInd) => {
                 return (
-                  <Dropdown.Item key={subInd}>{subItem.title}</Dropdown.Item>
+                  <Link key={subInd} href={subItem.path}>
+                    <Dropdown.Item>{subItem.title}</Dropdown.Item>
+                  </Link>
                 );
               })}
           </Dropdown>

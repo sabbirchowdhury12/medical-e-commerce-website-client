@@ -24,7 +24,7 @@ const SearchForm = () => {
       <input
         type="search"
         id="search-dropdown"
-        className="block p-3 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-full focus:ring-0 focus:outline-none border-0 "
+        className="block p-3 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-full  focus:ring-0 focus:outline-none border-0 "
         placeholder="Search ..."
         required
       />
@@ -55,7 +55,7 @@ const SearchForm = () => {
           id="dropdown-button"
           type="button"
           onClick={toggleDropdown}
-          className="hidden md:inline-flex p-2 font-semibold flex-shrink-0 z-10  items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-full hover:bg-gray-200 focus:ring-0 focus:outline-none"
+          className="hidden md:inline-flex p-2 font-semibold flex-shrink-0 z-10  items-center py-2.5 px-4 text-sm text-center text-gray-900 bg-gray-100 rounded-l-full hover:bg-gray-200 focus:ring-0 focus:outline-none"
         >
           {selectedCategory}
           <svg
@@ -88,7 +88,7 @@ const SearchForm = () => {
                   <button
                     type="button"
                     onClick={() => selectCategory(category)}
-                    className="font-sans  inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    className="  text-sm  inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
                     {category}
                   </button>

@@ -3,10 +3,18 @@
 import FormInput from "@/components/form/formInput";
 import Button from "@/components/ui/button";
 import { useUserRegisterMutation } from "@/redux/api/authApi";
-import { setAccessToLocalStorage, setUserToLocalStorage } from "@/service/auth";
+import { useAppDispatch } from "@/redux/hook";
+import { setCredentials } from "@/redux/slice/authSlice";
+import {
+  getUserFromStorage,
+  setAccessToLocalStorage,
+  setUserToLocalStorage,
+} from "@/service/auth";
+import { DecodedToken } from "@/type/common";
+import { jwtDecode } from "jwt-decode";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const getFormData = (
@@ -19,9 +27,26 @@ const getFormData = (
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const [userRegister] = useUserRegisterMutation();
   const [error, setError] = useState<string>("");
+
+  const [isClient, setIsClient] = useState(false); // State to check client-side rendering
+
+  useEffect(() => {
+    // Only run this code when on the client
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      const user = localStorage.getItem("user");
+      if (user) {
+        router.push("/");
+      }
+    }
+  }, [isClient, router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,16 +61,29 @@ const RegisterForm: React.FC = () => {
     }
     delete formData.confirmPassword;
 
-    const { data } = await userRegister(formData);
+    try {
+      const { data } = await userRegister(formData).unwrap();
 
-    console.log(data);
-    if (data && data?.data?.accessToken) {
-      toast.success("Register  successfully!");
-      router.push("/");
-      setAccessToLocalStorage(data?.data?.accessToken);
-      setUserToLocalStorage(data?.data?.user);
-    } else {
-      toast.error("something went wrong. please try later.");
+      if (data && data.accessToken) {
+        const { accessToken, user } = data;
+        localStorage.setItem("token", accessToken);
+        const decodedToken = jwtDecode<DecodedToken>(accessToken);
+        dispatch(
+          setCredentials({
+            decodedUser: { id: decodedToken.id, role: decodedToken.role },
+            token: accessToken,
+            user: user,
+          })
+        );
+        toast.success("Login successfully!");
+        router.push("/");
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 

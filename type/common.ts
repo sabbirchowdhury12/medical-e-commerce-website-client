@@ -3,6 +3,10 @@ export interface IVariant {
   variantName: string;
   variantPrice: number;
 }
+export interface DecodedToken {
+  id: string;
+  role: string;
+}
 
 export interface IProduct {
   _id: string;

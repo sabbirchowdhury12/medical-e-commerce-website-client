@@ -4,7 +4,7 @@ interface DropdownInputProps {
   items: string[];
   onChange: (value: string) => void;
   disabled?: boolean;
-  name: string;
+  name?: string;
 }
 
 export const DropdownInput: React.FC<DropdownInputProps> = ({

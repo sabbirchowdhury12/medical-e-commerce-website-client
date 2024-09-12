@@ -4,16 +4,14 @@ interface AuthState {
   user: any | null;
   token: string | null;
   isAuthenticated: boolean;
+  decodedUser: any;
 }
 
 const initialState: AuthState = {
-  user:
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("user") || "null")
-      : null,
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
-  isAuthenticated:
-    typeof window !== "undefined" ? !!localStorage.getItem("token") : false,
+  user: null,
+  token: null,
+  isAuthenticated: false,
+  decodedUser: null,
 };
 
 const authSlice = createSlice({
@@ -22,13 +20,15 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (
       state,
-      action: PayloadAction<{ user: any; token: string }>
+      action: PayloadAction<{ decodedUser: any; user: any; token: string }>
     ) => {
       state.user = action.payload.user;
+      state.decodedUser = action.payload.decodedUser;
       state.token = action.payload.token;
       state.isAuthenticated = true;
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("decoded_user", JSON.stringify(action.payload.user));
     },
     logout: (state) => {
       state.user = null;
@@ -36,6 +36,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      localStorage.removeItem("decoded_user");
     },
   },
 });

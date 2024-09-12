@@ -7,24 +7,22 @@ export const menu = [
   {
     title: "Home ",
     path: "/home",
-    submenu: [
-      { title: "Home Page 01", path: "Home Page 02" },
-      { title: "Home Page 01", path: "Home Page 02" },
-    ],
+    submenu: [{ title: "Home Page 01", path: "/" }],
   },
   {
     title: "About ",
     path: "/about",
-    submenu: [{ title: "Home Page 01", path: "Home Page 02" }],
+    submenu: [{ title: "About Page 01", path: "about" }],
   },
   {
     title: "Contact ",
     path: "/contact",
-    submenu: [{ title: "Home Page 01", path: "Home Page 02" }],
+    submenu: [{ title: "Contact Page 01", path: "/contact" }],
   },
   {
     title: "Service",
     path: "/service",
+    submenu: [{ title: "Service Page 01", path: "/service" }],
   },
 ];
 
@@ -58,15 +56,15 @@ export const categories = [
     submenu: [
       {
         title: "Pain Killer",
-        path: "/pain-killer",
+        path: "/shop/product",
       },
       {
         title: "Gastic",
-        path: "/gastic",
+        path: "/shop/product",
       },
       {
         title: "Diabetic",
-        path: "/diabetic",
+        path: "/shop/product",
       },
     ],
   },
@@ -76,15 +74,15 @@ export const categories = [
     submenu: [
       {
         title: "sergical product",
-        path: "/sergical-product",
+        path: "/shop/product",
       },
       {
         title: "Frist Aid",
-        path: "/frist-aid",
+        path: "/shop/product",
       },
       {
         title: "Device ",
-        path: "/device",
+        path: "/shop/product",
       },
     ],
   },
@@ -94,11 +92,11 @@ export const categories = [
     submenu: [
       {
         title: "Mask",
-        path: "/",
+        path: "/shop/product",
       },
       {
         title: "PPI",
-        path: "/",
+        path: "/shop/product",
       },
     ],
   },
@@ -108,7 +106,7 @@ export const categories = [
     submenu: [
       {
         title: "Sanitizer",
-        path: "/",
+        path: "/shop/product",
       },
     ],
   },

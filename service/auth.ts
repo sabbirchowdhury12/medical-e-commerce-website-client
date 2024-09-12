@@ -22,7 +22,7 @@ export const setAccessToLocalStorage = (token: string) => {
 
 export const getUserFromStorage = (): any => {
   if (typeof window !== "undefined") {
-    const item = localStorage.getItem("e-commerce_User");
+    const item = localStorage.getItem("user");
     if (item) {
       try {
         return JSON.parse(item);

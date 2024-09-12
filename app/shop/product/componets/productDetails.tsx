@@ -18,6 +18,7 @@ import Loader from "@/components/loding";
 import { useGetSingleProductQuery } from "@/redux/api/productApi";
 import { motion } from "framer-motion";
 import ImageSlider from "@/components/ui/imageSlider";
+import SearchForm from "@/components/form/searchForm";
 
 // const product = {
 //   _id: "01",
@@ -76,10 +77,9 @@ const ProductDetails = () => {
   }, [dispatch, id, count]);
 
   if (!product) return <Loader />;
-  if (error) return <div>Error loading product details.</div>;
 
   return (
-    <div className="h-screen">
+    <div>
       <Breadcrumbs title="Product Details" path="product details" />
 
       <Container>
@@ -179,7 +179,7 @@ const ProductDetails = () => {
             </div>
           </FlexBox>
 
-          <div className="mt-20 md:mt-0">
+          <div className="flex-1 mt-20 md:mt-0">
             <ImageSlider photos={product?.photos} />
           </div>
         </FlexBetween>

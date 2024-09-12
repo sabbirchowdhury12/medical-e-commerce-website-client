@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import React from "react";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Providers from "@/provider/provider";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Autox",
-  description: "A Comprehensive Mobility Solutions Platform",
+  title: "Pharma Plus",
+  description: "Buy yout neccesary Medicine",
 };
 
 export default function RootLayout({
@@ -20,7 +17,7 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-        <body className={`${inter.className}`}>
+        <body>
           {children}
           <Toaster />
         </body>

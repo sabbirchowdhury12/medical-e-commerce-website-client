@@ -36,7 +36,7 @@ const ProductFlex = ({ products }: any) => {
       {products?.map((product: any) => (
         <div
           key={product._id}
-          className="group border-4 hover:shadow-lg  border-border_color_8 p-8 text-center relative"
+          className="group border-4 hover:shadow-lg transition-all duration-300  hover:scale-y-105  border-border_color_8 p-8 text-center relative"
         >
           <FlexBetween className="flex-col md:flex-row">
             <div className="h-36 w-36">
@@ -46,7 +46,7 @@ const ProductFlex = ({ products }: any) => {
                 alt={product.slug}
               />
             </div>
-            <FlexBox className="flex-1 flex-col items-start gap-4 ">
+            <FlexBox className="flex-1 flex-col  md:items-start gap-4 ">
               <p className="mt-8 text-sm font-bold font-serif">
                 {product.name}
               </p>

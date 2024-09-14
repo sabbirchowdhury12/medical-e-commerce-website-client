@@ -16,9 +16,10 @@ export const productApi = baseApi.injectEndpoints({
         sortBy,
         subCategory,
         sortOrder,
-        limit,
+        itemsPerPage,
+        currentPage,
       }) => {
-        let url = `/product?searchTerm=${searchValue}&sortBy=${sortBy}&sortOrder=${sortOrder}&limit${limit}`;
+        let url = `/product?searchTerm=${searchValue}&sortBy=${sortBy}&sortOrder=${sortOrder}&limit=${itemsPerPage}&page=${currentPage}`;
         if (categoryName) {
           url += `&categoryName=${categoryName}`;
         }

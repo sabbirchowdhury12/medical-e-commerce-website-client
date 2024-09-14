@@ -1,7 +1,8 @@
 import React from "react";
-import Hero from "./components/hero";
 import Container from "@/components/layout/container";
-import ProductSection from "./components/productSection";
+import Hero from "./components/hero/hero";
+import ProductSection from "./components/categorySection/productSection";
+import FreaturedProducts from "./components/freaturedSection/freaturedProducts";
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
       <Container>
         <Hero />
         <ProductSection />
+        <FreaturedProducts />
       </Container>
     </>
   );

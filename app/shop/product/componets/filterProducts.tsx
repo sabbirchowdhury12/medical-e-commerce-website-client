@@ -16,7 +16,6 @@ const FilterProducts: React.FC<FilterProductsProps> = ({
   products,
   currentSubCategories,
 }) => {
-  console.log(products, currentSubCategories);
   return (
     <>
       {/* filter by category */}

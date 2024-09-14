@@ -5,11 +5,12 @@ import FlexBox from "@/components/layout/flexbox";
 import { MenuIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
-import HeroCarousel from "./carousel";
+
 import { categories } from "@/utils/data";
 import CustomAccordion from "@/components/ui/customAccordion";
 import HeroCard from "./heroCard";
 import Link from "next/link";
+import HeroCarousel from "./carousel";
 
 const Hero = () => {
   const [isOpen, setIsOpen] = useState(true);

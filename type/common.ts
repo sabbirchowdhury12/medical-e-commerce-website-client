@@ -61,6 +61,8 @@ export interface ProductQueryParams {
   sortOrder?: "asc" | "desc";
   categoryName?: string;
   subCategory?: string | null;
+  itemsPerPage?: number;
+  currentPage?: number;
 }
 
 // Define types for order list items

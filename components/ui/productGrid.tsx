@@ -32,7 +32,7 @@ const ProductGrid = ({ products }: any) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {products?.map((product: any) => (
         <motion.div
           key={product._id}
@@ -43,11 +43,13 @@ const ProductGrid = ({ products }: any) => {
           transition={{ duration: 0.3 }}
           className="group border  border-border_color_7 p-8 text-center relative"
         >
-          <CustomImage
-            src={product.photos[0]}
-            className="h-60 "
-            alt={product.slug}
-          />
+          <div className="h-36 w-32 mt-5 mx-auto flex justify-center items-center text-center">
+            <CustomImage
+              src={product.photos[0]}
+              className=" h-full w-full text-center block"
+              alt={product.slug}
+            />
+          </div>
           <p className="mt-8 text-sm font-bold font-serif">{product.name}</p>
           <p className="text-lg font-bold font-serif text-secondary_1">
             ${product.defaultPrice}

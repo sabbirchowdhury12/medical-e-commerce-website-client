@@ -32,7 +32,7 @@ const ProductFlex = ({ products }: any) => {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col  gap-6">
       {products?.map((product: any) => (
         <div
           key={product._id}
@@ -53,7 +53,7 @@ const ProductFlex = ({ products }: any) => {
               <p className="text-lg font-bold font-serif text-secondary_1">
                 ${product.defaultPrice}
               </p>
-              <p className="text-paragraph text-start">
+              <p className="text-paragraph text-start hidden md:block">
                 lorDolor at labore vero tempor est. No ipsum sadipscing vero sed
                 et at duo sanctus lorem, et elitr est eirmod.e
               </p>

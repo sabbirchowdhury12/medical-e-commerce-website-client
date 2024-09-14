@@ -2,6 +2,7 @@ import heroCardImg1 from "../assets/8-trolley.svg";
 import heroCardImg2 from "../assets/11-gift-card.svg";
 import heroCardImg3 from "../assets/10-credit-card.svg";
 import heroCardImg4 from "../assets/9-money.svg";
+import { OrderListItem } from "@/type/common";
 
 export const menu = [
   {
@@ -199,5 +200,33 @@ export const products = [
     defaultPrice: 210,
     createdAt: new Date(),
     updatedAt: new Date(),
+  },
+];
+
+export const orderList: OrderListItem[] = [
+  {
+    title: "Sorting By Latest",
+    value: "createdAt",
+    order: "asc",
+  },
+  {
+    title: "Name (A - Z)",
+    value: "name",
+    order: "asc",
+  },
+  {
+    title: "Name (Z - A)",
+    value: "name",
+    order: "desc",
+  },
+  {
+    title: "Price (Low > High)",
+    value: "defaultPrice",
+    order: "asc",
+  },
+  {
+    title: "Price (High < Low)",
+    value: "defaultPrice",
+    order: "desc",
   },
 ];

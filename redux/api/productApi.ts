@@ -10,10 +10,20 @@ export const productApi = baseApi.injectEndpoints({
       }),
     }),
     getAllProduct: build.query({
-      query: ({ searchValue, categoryName, sortBy }) => {
-        let url = `/product?searchTerm=${searchValue}&sortBy=${sortBy}`;
+      query: ({
+        searchValue,
+        categoryName,
+        sortBy,
+        subCategory,
+        sortOrder,
+        limit,
+      }) => {
+        let url = `/product?searchTerm=${searchValue}&sortBy=${sortBy}&sortOrder=${sortOrder}&limit${limit}`;
         if (categoryName) {
-          url += `&categoryName=${categoryName.toLowerCase()}`;
+          url += `&categoryName=${categoryName}`;
+        }
+        if (subCategory) {
+          url += `&subCategory=${subCategory}`;
         }
         return {
           url,

@@ -15,7 +15,7 @@ export default function CustomImage({
 }: ImageProps) {
   return (
     <Image
-      className={`w-full h-auto rounded-lg mx-auto, ${className}`}
+      className={`w-full h-auto  mx-auto, ${className}`}
       src={src}
       alt={alt}
       sizes="(min-width: 720px) 650px, calc(95.5vw - 19px)"

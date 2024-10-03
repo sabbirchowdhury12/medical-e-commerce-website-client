@@ -1,7 +1,32 @@
+export type loginFormData = {
+  email: string;
+  password: string;
+};
+
+export type registerFormData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+export interface CheckoutFormValues {
+  name: string;
+  phone: string;
+  email: string;
+  companyName: string;
+  division: string;
+  district: string;
+  upazilla: string;
+  roadNo: string;
+  houseNo: string;
+  paymentMethod: string;
+}
+
 export interface IVariant {
   _id: string;
-  variantName: string;
-  variantPrice: number;
+  name: string;
+  price: number;
 }
 export interface DecodedToken {
   id: string;

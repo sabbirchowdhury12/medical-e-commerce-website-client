@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { useParams } from "next/navigation";
 import FlexBox from "@/components/layout/flexbox";
 import Button from "@/components/ui/button";
-import { updateProduct } from "@/redux/slice/counterSlice";
+import { updateProduct } from "@/redux/slice/cartSlice";
 import { Carousel, HR, Label, Select, Tabs } from "flowbite-react";
 import { Heart, Notebook, Star, User } from "lucide-react";
 import CustomImage from "@/components/image/customImage";
@@ -17,34 +17,35 @@ import Breadcrumbs from "@/components/ui/breadcrumb";
 import Loader from "@/components/loding";
 import { useGetSingleProductQuery } from "@/redux/api/productApi";
 import { motion } from "framer-motion";
-import ImageSlider from "@/components/ui/imageSlider";
-import SearchForm from "@/components/form/searchForm";
 
-// const product = {
-//   _id: "01",
-//   name: "Product 1",
-//   slug: "product-1",
-//   photos: [
-//     "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/product-2/11.png",
-//     "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/product-2/11.png",
-//   ],
-//   description: "This is the description for Product 1.",
-//   metaKey: "product1, example",
-//   company: "Company A",
-//   discount: 10,
-//   stockStatus: true,
-//   status: "active",
-//   categoryId: "64b5f8e2f2a4b8c1d4e5f6a7",
-//   categoryName: "Category A",
-//   variants: [
-//     { _id: "01", variantName: "5mg", variantPrice: 100 },
-//     { _id: "02", variantName: "10mg", variantPrice: 120 },
-//     { _id: "03", variantName: "20mg", variantPrice: 200 },
-//   ],
-//   defaultPrice: 110,
-//   createdAt: new Date(),
-//   updatedAt: new Date(),
-// };
+import SearchForm from "@/components/form/searchForm";
+import ImageSlider from "./imageSlider";
+
+const product = {
+  _id: "01",
+  name: "Product 1",
+  slug: "product-1",
+  photos: [
+    "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/product-2/11.png",
+    "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/product-2/11.png",
+  ],
+  description: "This is the description for Product 1.",
+  metaKey: "product1, example",
+  company: "Company A",
+  discount: 10,
+  stockStatus: true,
+  status: "active",
+  categoryId: "64b5f8e2f2a4b8c1d4e5f6a7",
+  categoryName: "Category A",
+  variants: [
+    { _id: "01", name: "5mg", price: 100 },
+    { _id: "02", name: "10mg", price: 120 },
+    { _id: "03", name: "20mg", price: 200 },
+  ],
+  defaultPrice: 110,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -57,7 +58,7 @@ const ProductDetails = () => {
   const id = Array.isArray(productId) ? productId[0] : productId;
 
   const { data, error, isLoading } = useGetSingleProductQuery(id);
-  const product = data?.data;
+  // const product = data?.data;
 
   const [price, setPrice] = useState(product?.defaultPrice);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -84,7 +85,10 @@ const ProductDetails = () => {
 
       <Container>
         <FlexBetween className=" my-40 flex-col md:flex-row">
-          <FlexBox className=" flex-1 ">
+          <div className=" mb-10 w-1/2 md:flex-1 ">
+            <ImageSlider photos={product?.photos} />
+          </div>
+          <FlexBox className="w-full md:flex-1 mt-20  md:mt-0">
             <div>
               <p className="text-2xl font-bold uppercase font-sans">
                 {product?.name}
@@ -92,7 +96,7 @@ const ProductDetails = () => {
               <p className="text-xl text-secondary_1 font-bold mt-2">
                 $ {price}{" "}
                 <span className="text-sm line-through ml-4">
-                  $ {price + (price * product?.discount) / 100}
+                  $ {(price + (price * product?.discount) / 100).toFixed(2)}
                 </span>
               </p>
               <HR />
@@ -178,10 +182,6 @@ const ProductDetails = () => {
               </div>
             </div>
           </FlexBox>
-
-          <div className="flex-1 mt-20 md:mt-0">
-            <ImageSlider photos={product?.photos} />
-          </div>
         </FlexBetween>
         <div className="overflow-x-auto">
           <Tabs className="focus:border-none focus:outline-none focus:ring-0 mb-10">

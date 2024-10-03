@@ -54,21 +54,6 @@ export const cartSlice = createSlice({
       saveToLocalStorage(state);
     },
 
-    // decrement: (state, action: PayloadAction<string>) => {
-    //   const productId = action.payload;
-    //   const product = state.products.find((p) => p.productId === productId);
-
-    //   if (product && product.quantity > 1) {
-    //     product.quantity -= 1;
-    //   } else if (product) {
-    //     state.products = state.products.filter(
-    //       (p) => p.productId !== productId
-    //     );
-    //   }
-
-    //   saveToLocalStorage(state);
-    // },
-
     updateProduct: (
       state,
       action: PayloadAction<{ id: string; quantity: number }>
@@ -85,6 +70,16 @@ export const cartSlice = createSlice({
         state.products.push({ productId, quantity });
         console.log("Product added:", { productId, quantity }); // Debug log
       }
+
+      saveToLocalStorage(state);
+    },
+    removeProduct: (state, action: PayloadAction<{ id: string }>) => {
+      console.log("Action Payload:", action.payload); // Debug log
+      const { id } = action.payload;
+
+      const product = state.products.filter((p) => p.productId !== id);
+
+      state.products = product;
 
       saveToLocalStorage(state);
     },
@@ -107,8 +102,13 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { increment, setQuantity, initializeCart, updateProduct } =
-  cartSlice.actions;
+export const {
+  increment,
+  setQuantity,
+  initializeCart,
+  updateProduct,
+  removeProduct,
+} = cartSlice.actions;
 
 export const selectProductQuantity = (state: RootState, productId: string) => {
   const product = state.cart.products.find((p) => p.productId === productId);

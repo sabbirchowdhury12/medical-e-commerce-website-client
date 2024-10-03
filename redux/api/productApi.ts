@@ -19,13 +19,35 @@ export const productApi = baseApi.injectEndpoints({
         itemsPerPage,
         currentPage,
       }) => {
-        let url = `/product?searchTerm=${searchValue}&sortBy=${sortBy}&sortOrder=${sortOrder}&limit=${itemsPerPage}&page=${currentPage}`;
+        // Base URL
+        let url = `/product?`;
+
+        // Add query parameters conditionally
+        if (searchValue) {
+          url += `searchTerm=${searchValue}&`;
+        }
+        if (sortBy) {
+          url += `sortBy=${sortBy}&`;
+        }
+        if (sortOrder) {
+          url += `sortOrder=${sortOrder}&`;
+        }
+        if (itemsPerPage) {
+          url += `limit=${itemsPerPage}&`;
+        }
+        if (currentPage) {
+          url += `page=${currentPage}&`;
+        }
         if (categoryName) {
-          url += `&categoryName=${categoryName}`;
+          url += `categoryName=${categoryName}&`;
         }
         if (subCategory) {
-          url += `&subCategory=${subCategory}`;
+          url += `subCategory=${subCategory}&`;
         }
+
+        // Remove the trailing '&' or '?' if no parameters are added
+        url = url.endsWith("&") ? url.slice(0, -1) : url;
+
         return {
           url,
           method: "GET",

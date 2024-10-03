@@ -1,13 +1,14 @@
 "use client";
 
 import { useAppDispatch } from "@/redux/hook";
-import { increment } from "@/redux/slice/counterSlice";
+import { increment } from "@/redux/slice/cartSlice";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import CustomImage from "../image/customImage";
 import CustomModal from "./customModal";
 import ProductIcon from "../productIcon";
 import { Button, Modal } from "flowbite-react";
+import { addToWishlist } from "@/redux/slice/whishlistSlice";
 
 const ProductGrid = ({ products }: any) => {
   const [openModal, setOpenModal] = useState(false);
@@ -24,7 +25,8 @@ const ProductGrid = ({ products }: any) => {
     setMessage(" Successfully added to your Cart");
     setButton({ title: "View Cart", path: "/view cart" });
   };
-  const handleWishlist = (product: any) => {
+  const handleWishlist = (id: string, product: any) => {
+    dispatch(addToWishlist({ id }));
     setOpenModal(true);
     setCurrentProduct(product);
     setMessage(" Successfully added to your Wishlist");

@@ -19,7 +19,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { logout } from "@/redux/slice/authSlice";
 import { useRouter } from "next/navigation";
-import { initializeCart } from "@/redux/slice/counterSlice";
+import { initializeCart } from "@/redux/slice/cartSlice";
 
 // Define User type
 type User = {

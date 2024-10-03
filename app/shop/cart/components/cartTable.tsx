@@ -4,7 +4,7 @@ import CustomImage from "@/components/image/customImage";
 import Container from "@/components/layout/container";
 
 import { useAppDispatch } from "@/redux/hook";
-import { updateProduct } from "@/redux/slice/counterSlice";
+import { removeProduct, updateProduct } from "@/redux/slice/cartSlice";
 
 import { Table } from "flowbite-react";
 import { Delete } from "lucide-react";
@@ -14,7 +14,6 @@ export function CartTable({ products }: any) {
     ((typeof products)[0] & { quantity: number })[]
   >([]);
 
-  console.log(products);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -50,6 +49,15 @@ export function CartTable({ products }: any) {
     );
   };
 
+  const handleRemoveProduct = (productId: string) => {
+    // Dispatch the action to remove the product from the Redux store
+    dispatch(removeProduct({ id: productId }));
+
+    // Update the local state to remove the product from the UI
+    setCartProducts((prevProducts) =>
+      prevProducts.filter((product) => product._id !== productId)
+    );
+  };
   return (
     <div className="overflow-x-auto">
       <Table hoverable>
@@ -111,7 +119,9 @@ export function CartTable({ products }: any) {
                 $ {product.defaultPrice * product.quantity}
               </Table.Cell>
               <Table.Cell>
-                <Delete />
+                <button onClick={() => handleRemoveProduct(product._id)}>
+                  <Delete />
+                </button>
               </Table.Cell>
             </Table.Row>
           ))}

@@ -5,24 +5,15 @@ import Button from "@/components/ui/button";
 import { useUserRegisterMutation } from "@/redux/api/authApi";
 import { useAppDispatch } from "@/redux/hook";
 import { setCredentials } from "@/redux/slice/authSlice";
-import {
-  getUserFromStorage,
-  setAccessToLocalStorage,
-  setUserToLocalStorage,
-} from "@/service/auth";
-import { DecodedToken } from "@/type/common";
+import { DecodedToken, registerFormData } from "@/type/common";
 import { jwtDecode } from "jwt-decode";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
-const getFormData = (
-  form: HTMLFormElement
-): Record<string, FormDataEntryValue> => {
-  const formData = new FormData(form);
-  return Object.fromEntries(formData.entries());
-};
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registrationValidationSchema } from "@/lib/validation";
 
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -30,12 +21,17 @@ const RegisterForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const [userRegister] = useUserRegisterMutation();
-  const [error, setError] = useState<string>("");
+  const [isClient, setIsClient] = useState(false);
 
-  const [isClient, setIsClient] = useState(false); // State to check client-side rendering
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<registerFormData>({
+    resolver: yupResolver(registrationValidationSchema),
+  });
 
   useEffect(() => {
-    // Only run this code when on the client
     setIsClient(true);
   }, []);
 
@@ -48,22 +44,11 @@ const RegisterForm: React.FC = () => {
     }
   }, [isClient, router]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = getFormData(e.currentTarget);
-
-    const password = formData.password as string;
-    const confirmPassword = formData.confirmPassword as string;
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-    delete formData.confirmPassword;
-
+  const onSubmit: SubmitHandler<registerFormData> = async (formData) => {
+    setLoading(true);
+    console.log(formData);
     try {
       const { data } = await userRegister(formData).unwrap();
-
       if (data && data.accessToken) {
         const { accessToken, user } = data;
         localStorage.setItem("token", accessToken);
@@ -75,52 +60,55 @@ const RegisterForm: React.FC = () => {
             user: user,
           })
         );
-        toast.success("Login successfully!");
+        toast.success("Registration successful!");
         router.push("/");
       } else {
-        toast.error("Login failed. Please try again.");
+        toast.error("Registration failed. Please try again.");
       }
     } catch (error) {
-      toast.error("Login failed. Please try again.");
+      toast.error("Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex-1 md:w-3/4 mx-auto mb-20">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex-1 w-full md:w-3/4 mx-auto mb-20"
+    >
       <FormInput
-        labelValue={"Name"}
-        type={"text"}
-        placeholder={"Enter Your Name"}
-        name="name"
+        labelValue="Name"
+        type="text"
+        placeholder="Enter Your Name"
+        {...register("name")}
+        error={errors.name?.message}
       />
       <FormInput
-        labelValue={"Email"}
-        type={"email"}
-        placeholder={"Enter Your Email"}
-        name="email"
+        labelValue="Email"
+        type="email"
+        placeholder="Enter Your Email"
+        {...register("email")}
+        error={errors.email?.message}
       />
       <FormInput
-        labelValue={"Password"}
-        type={"password"}
-        placeholder={"Enter Your password"}
-        name="password"
+        labelValue="Password"
+        type="password"
+        placeholder="Enter Your Password"
+        {...register("password")}
+        error={errors.password?.message}
       />
       <FormInput
-        labelValue={"Confirm Password"}
-        type={"password"}
-        placeholder={"Enter Your confirm password"}
-        name="confirmPassword"
+        labelValue="Confirm Password"
+        type="password"
+        placeholder="Confirm Your Password"
+        {...register("confirmPassword")}
+        error={errors.confirmPassword?.message}
       />
-
-      {error && <div className="text-red-500 mb-4">{error}</div>}
 
       <Button disabled={loading} className="w-full">
         {loading ? (
-          <>
-            <Loader2 className="ml-2 h-4 w-4 animate-spin" />
-          </>
+          <Loader2 className="ml-2 h-4 w-4 animate-spin" />
         ) : (
           "Register"
         )}

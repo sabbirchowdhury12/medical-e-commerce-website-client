@@ -13,7 +13,7 @@ import ProductFlex from "@/components/ui/productFlex";
 import ProductGrid from "@/components/ui/productGrid";
 import { CardLoader, CardLoaderPage } from "@/components/cardLoader";
 import { useSearchParams } from "next/navigation";
-import { orderList } from "@/utils/data";
+import { orderList, products } from "@/utils/data";
 import { Pagination } from "flowbite-react";
 
 const ProductClient = () => {
@@ -69,7 +69,7 @@ const ProductClient = () => {
   // Fetch categories and products using Redux hooks
   const { data: categoryData } = useGetAllCategoryQuery({});
   const { data: productData } = useGetAllProductQuery(productQueryParams);
-  const products = productData?.data;
+  // const products = productData?.data;
   const categories = categoryData?.data;
 
   // Calculate total pages whenever product data changes

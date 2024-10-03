@@ -1,24 +1,21 @@
 "use client";
-import { DropdownInput } from "@/components/form/dropdown";
+
 import FormInput from "@/components/form/formInput";
 import RadioInput from "@/components/form/radioInput";
 import Container from "@/components/layout/container";
 import FlexBetween from "@/components/layout/flexBetween";
 import Button from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import CartProduct from "./cartProduct";
-import { District, Division } from "@/type/common";
+import { CheckoutFormValues, District, Division } from "@/type/common";
 import { useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { useCreateOrderMutation } from "@/redux/api/orderApi";
 import toast from "react-hot-toast";
-
-const getFormData = (
-  form: HTMLFormElement
-): Record<string, FormDataEntryValue> => {
-  const formData = new FormData(form);
-  return Object.fromEntries(formData.entries());
-};
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { DropdownInput } from "@/components/form/dropdown";
+import { checkoutValidationSchema } from "@/lib/validation";
 
 const CheckoutClient = ({ products }: any) => {
   const [divisions, setDivisions] = useState<Division[]>([]);
@@ -28,7 +25,7 @@ const CheckoutClient = ({ products }: any) => {
   const [selectedDivision, setSelectedDivision] = useState<string>("");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("");
   const [selectedUpazilla, setSelectedUpazilla] = useState<string>("");
-  const [totalPrice, setTotalPrice] = useState<string>("");
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const user = useAppSelector((state: RootState) => state.auth.user);
 
@@ -36,67 +33,25 @@ const CheckoutClient = ({ products }: any) => {
     ((typeof products)[0] & { quantity: number })[]
   >([]);
 
-  console.log(products);
-
-  // hooks
-  useEffect(() => {
-    // Fetch divisions from the API
-    const fetchDivisions = async () => {
-      try {
-        const response = await fetch("https://bdapis.com/api/v1.2/divisions");
-        const data = await response.json();
-        setDivisions(data?.data);
-      } catch (error) {
-        console.error("Error fetching divisions:", error);
-      }
-    };
-
-    fetchDivisions();
-  }, []);
-
-  useEffect(() => {
-    if (selectedDivision) {
-      // Fetch districts and upazillas for the selected division
-      const fetchDistricts = async () => {
-        try {
-          const response = await fetch(
-            `https://bdapis.com/api/v1.2/division/${selectedDivision.toLowerCase()}`
-          );
-          const data = await response.json();
-          setDistricts(data?.data);
-          setUpazillas([]); // Reset upazillas when division changes
-          setSelectedDistrict(""); // Reset selected district
-        } catch (error) {
-          console.error("Error fetching districts:", error);
-        }
-      };
-
-      fetchDistricts();
-    }
-  }, [selectedDivision]);
-
-  useEffect(() => {
-    if (selectedDistrict) {
-      // Find the selected district and update upazillas
-      const district = districts.find(
-        (dist) => dist.district === selectedDistrict
-      );
-      setUpazillas(district ? district.upazilla : []);
-    }
-  }, [selectedDistrict, districts]);
-
   const [createOrder] = useCreateOrderMutation();
 
-  const handleOrder = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
 
+    formState: { errors },
+  } = useForm<CheckoutFormValues>({
+    resolver: yupResolver(checkoutValidationSchema),
+  });
+
+  // Handle form submission
+  const onSubmit: SubmitHandler<CheckoutFormValues> = async (formData) => {
+    console.log(formData);
     const orderedProducts = cartProducts.map((product) => ({
       product: product._id,
       quantity: product.quantity,
       price: product.defaultPrice * product.quantity,
     }));
-
-    const formData = getFormData(e.currentTarget);
 
     const orderData = {
       user: user?.id,
@@ -110,29 +65,57 @@ const CheckoutClient = ({ products }: any) => {
         division: formData.division,
         district: formData.district,
         upazilla: formData.upazilla,
-        roadNo: formData.companyName,
-        houseNo: formData.companyName,
+        roadNo: formData.roadNo,
+        houseNo: formData.houseNo,
       },
-
       paymentInfo: {
         method: formData.paymentMethod,
         status: "Pending",
       },
     };
+    console.log(orderData);
     try {
-      console.log(orderData);
       const { data } = await createOrder(orderData).unwrap();
-      toast.success("orderdone");
-      console.log(data);
+      toast.success("Order placed successfully!");
     } catch (error) {
-      toast.error("Login failed. Please try again.");
+      toast.error("Order placement failed. Please try again.");
     }
   };
 
-  // const clearCart = () => {
-  //   // Logic to clear the cart (e.g., updating state, local storage, etc.)
-  //   dispatch(clearCartAction()); // Assuming you're using Redux or another state management library
-  // };
+  useEffect(() => {
+    const fetchLocationData = async () => {
+      try {
+        // Fetch divisions
+        const divisionsResponse = await fetch(
+          "https://bdapis.com/api/v1.2/divisions"
+        );
+        const divisionsData = await divisionsResponse.json();
+        setDivisions(divisionsData?.data);
+
+        // Fetch districts if a division is selected
+        if (selectedDivision) {
+          const districtsResponse = await fetch(
+            `https://bdapis.com/api/v1.2/division/${selectedDivision.toLowerCase()}`
+          );
+          const districtsData = await districtsResponse.json();
+          setDistricts(districtsData?.data);
+          setSelectedDistrict(""); // Reset selected district when division changes
+          setUpazillas([]); // Reset upazillas when division changes
+        }
+      } catch (error) {
+        console.error("Error fetching location data:", error);
+      }
+    };
+
+    fetchLocationData();
+  }, [selectedDivision]);
+
+  useEffect(() => {
+    const selectedDistrictData = districts.find(
+      (dist) => dist.district === selectedDistrict
+    );
+    setUpazillas(selectedDistrictData ? selectedDistrictData.upazilla : []);
+  }, [selectedDistrict, districts]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -160,109 +143,132 @@ const CheckoutClient = ({ products }: any) => {
 
   return (
     <Container>
-      <form onSubmit={handleOrder}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="border border-border_color_7 p-2 md:p-10">
           <h2 className=" text-lg md:text-2xl font-bold pt-6 m">
             Billing Address
           </h2>
-
           <h2 className="h4-styles">Personal Information</h2>
-
           <FlexBetween className="gap-4 flex-col md:flex-row">
             <FormInput
               labelValue=""
               type="text"
               placeholder="Enter your name"
-              name="name"
+              {...register("name")}
             />
+            {errors.name && (
+              <p className="text-red-500">{errors.name.message}</p>
+            )}
             <FormInput
               labelValue=""
               type="tel"
               placeholder="Enter your phone number"
-              name="phone"
+              {...register("phone")}
             />
+            {errors.phone && (
+              <p className="text-red-500">{errors.phone.message}</p>
+            )}
           </FlexBetween>
-
           <FlexBetween className="gap-4 flex-col md:flex-row">
             <FormInput
               labelValue=""
               type="email"
               placeholder="Enter your email"
-              name="email"
+              {...register("email")}
             />
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
             <FormInput
               labelValue=""
               type="text"
               placeholder="Enter your company name or local address"
-              name="companyName"
+              {...register("companyName")}
             />
+            {errors.companyName && (
+              <p className="text-red-500">{errors.companyName.message}</p>
+            )}
           </FlexBetween>
-
           <h2 className="h4-styles">Address</h2>
           <FlexBetween className="gap-4 flex-col  md:flex-row">
             <DropdownInput
               label="Division"
               value={selectedDivision}
               items={divisions.map((div) => div.division)}
-              onChange={(value) => setSelectedDivision(value)}
+              onChange={(value: SetStateAction<string>) =>
+                setSelectedDivision(value)
+              }
+              disabled={false}
               name="division"
+              register={register}
+              error={errors.division?.message}
             />
             <DropdownInput
               label="District"
               value={selectedDistrict}
               items={districts.map((dist) => dist.district)}
-              onChange={(value) => setSelectedDistrict(value)}
+              onChange={(value: any) => setSelectedDistrict(value)}
               disabled={!selectedDivision}
-              name={"district"}
+              name="district"
+              register={register}
+              error={errors.district?.message}
             />
             <DropdownInput
               label="Upazilla"
               value={selectedUpazilla}
               items={upazillas}
-              onChange={(value) => setSelectedUpazilla(value)}
+              onChange={(value: any) => setSelectedUpazilla(value)}
               disabled={!selectedDistrict}
               name="upazilla"
+              register={register}
+              error={errors.upazilla?.message}
             />
           </FlexBetween>
-
           <FlexBetween className="gap-4 flex-col md:flex-row">
             <FormInput
               labelValue=""
               type="text"
-              placeholder="Road number"
-              name="roadNo"
+              placeholder="Road No"
+              {...register("roadNo")}
             />
+            {errors.roadNo && (
+              <p className="text-red-500">{errors.roadNo.message}</p>
+            )}
             <FormInput
               labelValue=""
               type="text"
-              placeholder="House number or village name"
-              name="houseNo "
+              placeholder="House No"
+              {...register("houseNo")}
             />
+            {errors.houseNo && (
+              <p className="text-red-500">{errors.houseNo.message}</p>
+            )}
           </FlexBetween>
         </div>
-
         <FlexBetween className="flex-col md:flex-row gap-6 my-20 items-start">
           <div className="flex-1 w-full">
             <p className="h4-styles">payment Method</p>
             <RadioInput
-              value={"Cash"}
-              label={"Cash On Delivery"}
-              name="paymentMethod"
+              value="Cash"
+              label="Cash On Delivery"
+              register={register("paymentMethod")} // Pass the register function as a prop
+              error={errors.paymentMethod?.message}
+              if
+              it
+              exists
             />
             <RadioInput
-              value={"Online"}
-              label={"Online Paynment"}
-              name="paymentMethod"
+              value="Online"
+              label="Online Payment"
+              register={register("paymentMethod")} // Pass the register function as a prop
+              error={errors.paymentMethod?.message}
+              if
+              it
+              exists
             />
-            <p className="text-paragraph my-4 tracking-wider text-sm leading-6">
-              {" "}
-              Your personal data will be used to process your order, support
-              your experience throughout this website, and for other purposes
-              described in our privacy policy.
-            </p>
-
-            <Button type="submit">Place Order</Button>
+            <Button type="submit">Confirm Order</Button>
           </div>
+
           <CartProduct
             setTotalPrice={setTotalPrice}
             cartProducts={cartProducts}

@@ -45,7 +45,7 @@ const Footers = () => {
           </div>
         </div>
         <div className="w-full bg-gray-700 px-4 py-6 sm:flex sm:items-center sm:justify-between bg-section_bg_7">
-          <Footer.Copyright href="#" by="Flowbite™" year={2022} />
+          <Footer.Copyright href="#" by="Sabbir Chowdhury" year={2024} />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon href="#" icon={Facebook} />
             <Footer.Icon href="#" icon={Instagram} />
@@ -57,11 +57,11 @@ const Footers = () => {
       </div>
 
       <div className="hidden md:flex absolute -top-1/2 left-1/2  transform -translate-x-1/2 translate-y-1/2 w-3/4 mx-auto bg-secondary_1  justify-between p-20 gap-6">
-        <p className=" text-xl lg:text-3xl font-bold font-sans tracking-wider text-white">
+        <p className=" text-xl lg:text-2xl font-bold font-sans tracking-wider text-white">
           Buy medical disposable face mask to protect your loved ones
         </p>
         <button className="relative text-black flex  h-[60px] w-56 p-4 items-center justify-center border border-border_color_7 hover:border-black overflow-hidden bg-white  shadow-2xl transition-all before:absolute before:h-0 before:w-0  hover:text-white before:rounded-full before:bg-section_bg_7 before:duration-500 before:ease-out hover:shadow-orange-600 hover:before:h-56 hover:before:w-56">
-          <span className="relative z-10 font-sans text-lg font-semibold">
+          <span className="relative z-10 font-sans text-sm font-semibold">
             Explore Now
           </span>
         </button>

@@ -44,7 +44,7 @@ const TestimonialSlider = () => {
   return (
     <section className=" bg-section_bg_1 py-8">
       <Container>
-        <Heading title="Testimonials" />
+        <Heading title="Testimonials" sub_title="Client's Feedback" />
         <Swiper
           slidesPerView={1}
           spaceBetween={10}

@@ -5,7 +5,7 @@ type FilterProductsProps = {
   categories: ICategory[];
   handleCategoryChange: (categoty: any) => void;
   handleSubCategoryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  products: IProduct[];
+  products: any;
   currentSubCategories: string[];
 };
 

@@ -5,7 +5,7 @@ import React from "react";
 
 interface CartProductProps {
   cartProducts: Array<IProduct & { quantity: number }>;
-  setTotalPrice: any;
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>; // Specify the correct type
 }
 
 const CartProduct: React.FC<CartProductProps> = ({
@@ -22,6 +22,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   const vatAmount = totalPrice * vatPercentage;
   const finalTotalPrice = totalPrice + vatAmount + delivery;
   setTotalPrice(finalTotalPrice);
+
   return (
     <div className="flex-1 w-full">
       <p className="h4-styles">Your Products</p>
@@ -37,7 +38,8 @@ const CartProduct: React.FC<CartProductProps> = ({
               <h2 className="p-bold">{product.quantity}</h2>
             </FlexBox>
             <p className="p-styles">
-              {product.defaultPrice * product.quantity}
+              {(product.defaultPrice * product.quantity).toFixed(2)}{" "}
+              {/* Formatting price */}
             </p>
           </FlexBetween>
         ))}
@@ -48,7 +50,7 @@ const CartProduct: React.FC<CartProductProps> = ({
         </FlexBetween>
         <FlexBetween className="hover:bg-section_bg_1 p-4">
           <p className="p-bold">Delivery</p>
-          <p>{delivery}</p>
+          <p>{delivery.toFixed(2)}</p> {/* Formatting delivery price */}
         </FlexBetween>
       </div>
       <FlexBetween className="hover:bg-section_bg_1 bg-section_bg_1 p-2 border border-border_color_7">

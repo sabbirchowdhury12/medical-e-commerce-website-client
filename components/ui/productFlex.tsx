@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppDispatch } from "@/redux/hook";
-import { increment } from "@/redux/slice/counterSlice";
+import { increment } from "@/redux/slice/cartSlice";
 import { useState } from "react";
 import CustomImage from "../image/customImage";
 import FlexBox from "../layout/flexbox";

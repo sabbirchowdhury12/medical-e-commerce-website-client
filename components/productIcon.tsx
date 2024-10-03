@@ -5,7 +5,7 @@ interface ProductIconProps {
   id: string;
   product: any;
   handleCart: (id: string, product: any) => void;
-  handleWishlist: (product: any) => void;
+  handleWishlist: (id: string, product: any) => void;
 }
 
 const ProductIcon: React.FC<ProductIconProps> = ({
@@ -28,7 +28,7 @@ const ProductIcon: React.FC<ProductIconProps> = ({
         <ShoppingCart />
       </div>
       <div
-        onClick={() => handleWishlist(product)}
+        onClick={() => handleWishlist(id, product)}
         className="w-12 flex justify-center items-center h-12 text-center hover:bg-secondary_1 text-paragraph hover:text-white"
       >
         <Heart />

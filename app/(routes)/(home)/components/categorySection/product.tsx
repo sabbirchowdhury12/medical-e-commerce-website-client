@@ -6,9 +6,10 @@ import { useState } from "react";
 
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
-import { increment } from "@/redux/slice/counterSlice";
+import { increment } from "@/redux/slice/cartSlice";
 import CustomImage from "@/components/image/customImage";
 import CustomModal from "@/components/ui/customModal";
+import { addToWishlist } from "@/redux/slice/whishlistSlice";
 
 const Product = ({ product }: any) => {
   const [openModal, setOpenModal] = useState(false);
@@ -25,7 +26,8 @@ const Product = ({ product }: any) => {
     setMessage(" Successfully added to your Cart");
     setButton({ title: "View Cart", path: "/view cart" });
   };
-  const handleWishlist = () => {
+  const handleWishlist = (id: string) => {
+    dispatch(addToWishlist({ id }));
     setOpenModal(true);
     setCurrentProduct(product);
     setMessage(" Successfully added to your Wishlist");
@@ -63,7 +65,7 @@ const Product = ({ product }: any) => {
           className="w-12  border-r-2 border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white"
         />
         <Heart
-          onClick={() => handleWishlist()}
+          onClick={() => handleWishlist(product?._id)}
           className="w-12   hover:bg-secondary_1 text-paragraph hover:text-white"
         />
       </div>

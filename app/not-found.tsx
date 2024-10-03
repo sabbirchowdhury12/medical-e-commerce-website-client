@@ -1,5 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
+import Button from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image"; // Import next/image for optimized image loading
+import logo from "../assets/logo2.svg";
 
 const Notfound = () => {
   return (
@@ -7,30 +11,31 @@ const Notfound = () => {
       <div className="xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0">
         <div className="relative">
           <div className="absolute">
-            <div className="">
+            <div>
               <h1 className="my-2 text-gray-800 font-bold text-2xl">
-                Looks like youve found the doorway to the great nothing
+                Looks like you’ve found the doorway to the great nothing
               </h1>
               <p className="my-2 text-gray-800">
-                Sorry about that! Please visit our hompage to get where you need
-                to go.
+                Sorry about that! Please visit our homepage to get where you
+                need to go.
               </p>
-              <Link
-                href={"/"}
-                className="sm:w-full lg:w-auto my-2 border rounded md py-4 px-8 text-center bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
-              >
-                Home Page
+              <Link href="/">
+                <Button>Home Page</Button>
               </Link>
             </div>
           </div>
           <div>
-            <img src="https://i.ibb.co/G9DC8S0/404-2.png" />
+            {/* Use alt text for better accessibility */}
+            <img
+              src="https://i.ibb.co/G9DC8S0/404-2.png"
+              alt="404 error illustration"
+            />
           </div>
         </div>
       </div>
-      <div>
-        <img src="https://i.ibb.co/ck1SGFJ/Group.png" />
-      </div>
+
+      {/* Use next/image for the imported logo */}
+      <Image className="h-40 w-40" src={logo} alt="Site logo" />
     </div>
   );
 };

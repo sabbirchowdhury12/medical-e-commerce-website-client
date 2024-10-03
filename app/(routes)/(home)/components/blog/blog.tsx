@@ -21,7 +21,7 @@ import { HR } from "flowbite-react";
 
 const Blog = () => {
   return (
-    <section className="w-full py-8">
+    <section className="w-full ">
       <Heading
         title="Latest News Feeds"
         sub_title="Health tips for your better life"

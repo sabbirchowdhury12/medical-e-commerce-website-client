@@ -12,9 +12,9 @@ export const productApi = baseApi.injectEndpoints({
     getAllProduct: build.query({
       query: ({
         searchValue,
-        categoryName,
+        categoryId,
         sortBy,
-        subCategory,
+        subCategoryName,
         sortOrder,
         itemsPerPage,
         currentPage,
@@ -38,11 +38,11 @@ export const productApi = baseApi.injectEndpoints({
         if (currentPage) {
           url += `page=${currentPage}&`;
         }
-        if (categoryName) {
-          url += `categoryName=${categoryName}&`;
+        if (categoryId) {
+          url += `categoryId=${categoryId}&`;
         }
-        if (subCategory) {
-          url += `subCategory=${subCategory}&`;
+        if (subCategoryName) {
+          url += `subCategoryName=${subCategoryName}&`;
         }
 
         // Remove the trailing '&' or '?' if no parameters are added

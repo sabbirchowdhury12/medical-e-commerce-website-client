@@ -29,7 +29,7 @@ const ProductSection = () => {
   }
 
   const products = productData?.data;
-
+  console.log(products);
   console.log("categoryid", categoryId);
 
   return (

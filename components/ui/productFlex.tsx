@@ -31,8 +31,6 @@ const ProductFlex = ({ products }: any) => {
     setButton({ title: "View Wishlist", path: "/view Wishlist" });
   };
 
-  console.log(products);
-
   return (
     <div className="flex flex-col  gap-6">
       {products?.map((product: any) => (

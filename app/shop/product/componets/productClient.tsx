@@ -50,8 +50,8 @@ const ProductClient = () => {
       searchValue,
       sortBy,
       sortOrder,
-      categoryName: selectedCategory?.toLowerCase() || undefined,
-      subCategory: selectedSubCategory?.toLowerCase() || undefined,
+      categoryId: selectedCategory,
+      subCategoryName: selectedSubCategory,
       itemsPerPage,
       currentPage,
     }),
@@ -89,7 +89,8 @@ const ProductClient = () => {
 
   // Handle category filter change
   const handleCategoryChange = (category: ICategory) => {
-    setSelectedCategory(category.slug);
+    console.log(category);
+    setSelectedCategory(category._id);
     setAvailableSubCategories(category.subCategory || []);
     setSelectedSubCategory(null); // Reset subcategory when the category changes
   };
@@ -97,6 +98,7 @@ const ProductClient = () => {
   // Handle subcategory filter change
   const handleSubCategorySelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSubCategory(e.target.value);
+    console.log(selectedSubCategory);
   };
 
   // Handle items per page change
@@ -109,7 +111,6 @@ const ProductClient = () => {
   // Handle page change
   const onPageChange = (page: number) => setCurrentPage(page);
 
-  console.log(productNameParam, categoryParam);
   return (
     <Container>
       <div className="flex flex-col md:flex-row items-start gap-10 ">

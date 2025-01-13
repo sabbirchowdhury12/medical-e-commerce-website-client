@@ -22,14 +22,14 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ photos }) => {
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="shadow mb-4 w-[80%] h-[80%] mx-auto"
+        className="shadow mb-4 w-full h-full"
       >
         {photos.map((img, index) => (
           <SwiperSlide key={index}>
             <img
               src={img}
               alt={`Slide ${index}`}
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover max-w-[200px] mx-auto h-[400px]"
             />
           </SwiperSlide>
         ))}
@@ -53,7 +53,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ photos }) => {
             <img
               src={img}
               alt={`Thumbnail ${index}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover max-w-[100px] mx-auto h-[150px]"
             />
           </SwiperSlide>
         ))}

@@ -4,11 +4,10 @@ import React, { useState } from "react";
 import FlexBox from "../../layout/flexbox";
 
 import FlexBetween from "../../layout/flexBetween";
-import { MenuIcon, User } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import Container from "../../layout/container";
 
 import MenuItems from "./menu";
-import SideNavbar from "./sideNavbar";
 import Drawer from "./drawer";
 
 const MenuNav = () => {

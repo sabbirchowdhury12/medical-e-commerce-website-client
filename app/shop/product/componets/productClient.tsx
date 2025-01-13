@@ -41,7 +41,7 @@ const ProductClient = () => {
 
   // Update search value based on query params
   useEffect(() => {
-    setSearchValue(categoryParam || productNameParam || "");
+    setSearchValue(productNameParam || categoryParam || "");
   }, [categoryParam, productNameParam]);
 
   // Memoized product query parameters

@@ -13,6 +13,7 @@ const SearchForm = () => {
   };
 
   const selectCategory = (category: string) => {
+    console.log(category);
     setSelectedCategory(category);
     setDropdownVisible(false);
   };

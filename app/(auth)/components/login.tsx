@@ -17,7 +17,6 @@ import { getUserFromStorage } from "@/service/auth";
 import { loginValidationSchema } from "@/lib/validation"; // Make sure to import your Yup schema
 import { Loader2 } from "lucide-react";
 
-// Define the LoginForm component
 const LoginForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -30,18 +29,31 @@ const LoginForm: React.FC = () => {
     password: string;
   };
 
+  // State to manage default values dynamically
+  const [defaultValues, setDefaultValues] = useState<FormValues>({
+    email: "",
+    password: "",
+  });
+
   // Initialize the form using useForm with Yup validation
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>({
     resolver: yupResolver(loginValidationSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues,
   });
+
+  // Set default values dynamically (e.g., from local storage or predefined values)
+  useEffect(() => {
+    const storedEmail =
+      localStorage.getItem("email") || "sabbirchowdhury@gmail.com";
+    const storedPassword = localStorage.getItem("password") || "123456";
+    setDefaultValues({ email: storedEmail, password: storedPassword });
+    reset({ email: storedEmail, password: storedPassword });
+  }, [reset]);
 
   // Redirect user if already logged in
   useEffect(() => {
@@ -92,6 +104,7 @@ const LoginForm: React.FC = () => {
         labelValue="Email"
         type="email"
         placeholder="Enter Your Email"
+        defaultValue={defaultValues.email}
         {...register("email")}
         error={errors.email?.message}
       />
@@ -100,6 +113,7 @@ const LoginForm: React.FC = () => {
         labelValue="Password"
         type="password"
         placeholder="Enter Your Password"
+        defaultValue={defaultValues.password}
         {...register("password")}
         error={errors.password?.message}
       />

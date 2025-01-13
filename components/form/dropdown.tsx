@@ -4,8 +4,8 @@ interface DropdownInputProps {
   items: string[];
   onChange?: (value: string) => void;
   disabled?: boolean;
-  name: string; // Add name prop for form registration
-  register: any; // Accept register prop from React Hook Form
+  name?: string; // Add name prop for form registration
+  register?: any; // Accept register prop from React Hook Form
   error?: string; // Add error prop
 }
 

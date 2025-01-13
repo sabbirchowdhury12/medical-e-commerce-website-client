@@ -8,6 +8,7 @@ import FlexBox from "@/components/layout/flexbox";
 import { Dropdown } from "flowbite-react";
 import { menu } from "@/utils/data";
 import MenuItems from "./menu";
+import Link from "next/link";
 
 const StickyNav = () => {
   return (
@@ -15,7 +16,13 @@ const StickyNav = () => {
       <Container>
         <FlexBetween>
           <FlexBox>
-            <CustomImage src={Logo} alt="" />
+            {/* <CustomImage src={Logo} alt="" /> */}
+            <Link href={"/"}>
+              <p className="font-bold text-2xl text-white">
+                {" "}
+                Pharma<span className="">+</span>
+              </p>
+            </Link>
           </FlexBox>
           <FlexBox gap="12" className="text-white font-bold text-sm">
             <MenuItems />

@@ -40,49 +40,51 @@ const FilterProducts: React.FC<FilterProductsProps> = ({
         ))}
       </div>
 
-      <div className="mt-10">
-        {/* filter by sub-category */}
-        <h3 className="h4-styles">Filter by Sub-category</h3>
-        <div className="border border-border_color_7 p-2 pl-6 text-paragraph rounded mt-14">
-          {currentSubCategories.length
-            ? currentSubCategories?.map((item) => (
-                <div key={item} className="my-6 font-semibold">
-                  <input
-                    type="radio"
-                    name="subCategory"
-                    id={item}
-                    value={item}
-                    onChange={handleSubCategoryChange}
-                  />
-                  <label htmlFor={item} className="ml-6">
-                    {item}
-                  </label>
-                </div>
-              ))
-            : products?.map(
-                ({
-                  _id,
-                  subCategory,
-                }: {
-                  _id: string;
-                  subCategory: string;
-                }) => (
-                  <div key={_id} className="my-6 font-semibold">
+      {currentSubCategories.length ? (
+        <div className="mt-10">
+          {/* filter by sub-category */}
+          <h3 className="h4-styles">Filter by Sub-category</h3>
+          <div className="border border-border_color_7 p-2 pl-6 text-paragraph rounded mt-14">
+            {currentSubCategories.length
+              ? currentSubCategories?.map((item) => (
+                  <div key={item} className="my-6 font-semibold">
                     <input
                       type="radio"
                       name="subCategory"
-                      id={_id}
-                      value={subCategory}
+                      id={item}
+                      value={item}
                       onChange={handleSubCategoryChange}
                     />
-                    <label htmlFor={_id} className="ml-6">
-                      {subCategory}
+                    <label htmlFor={item} className="ml-6">
+                      {item}
                     </label>
                   </div>
-                )
-              )}
+                ))
+              : products?.map(
+                  ({
+                    _id,
+                    subCategory,
+                  }: {
+                    _id: string;
+                    subCategory: string;
+                  }) => (
+                    <div key={_id} className="my-6 font-semibold">
+                      <input
+                        type="radio"
+                        name="subCategory"
+                        id={_id}
+                        value={subCategory}
+                        onChange={handleSubCategoryChange}
+                      />
+                      <label htmlFor={_id} className="ml-6">
+                        {subCategory}
+                      </label>
+                    </div>
+                  )
+                )}
+          </div>
         </div>
-      </div>
+      ) : undefined}
     </>
   );
 };

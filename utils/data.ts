@@ -12,6 +12,11 @@ export const menu = [
     submenu: [{ title: "Home Page 01", path: "/" }],
   },
   {
+    title: "Shop ",
+    path: "/shop",
+    submenu: [{ title: "Shop Page 01", path: "shop/product" }],
+  },
+  {
     title: "About ",
     path: "/about",
     submenu: [{ title: "About Page 01", path: "about" }],

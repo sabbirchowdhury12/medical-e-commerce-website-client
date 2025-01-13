@@ -16,7 +16,7 @@ const CartClient = () => {
 
   return (
     <Container>
-      <CartTable products={products} />
+      <CartTable products={data?.data} />
 
       {data?.data.length ? (
         <Link

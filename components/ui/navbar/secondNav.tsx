@@ -9,11 +9,9 @@ import {
   ShoppingCart,
   Store,
 } from "lucide-react";
-import Logo from "@/assets/logo.png";
 import Container from "@/components/layout/container";
 import FlexBetween from "@/components/layout/flexBetween";
 import FlexBox from "@/components/layout/flexbox";
-import CustomImage from "@/components/image/customImage";
 import SearchForm from "@/components/form/searchForm";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
@@ -119,9 +117,16 @@ const SecondNav: React.FC = () => {
     <Container>
       <FlexBetween className="p-6">
         {/* Logo */}
-        <FlexBox gap="4">
+        {/* <FlexBox gap="4">
           <CustomImage src={Logo} alt="Logo" />
-        </FlexBox>
+        </FlexBox> */}
+
+        <Link href={"/"}>
+          <p className="font-bold text-2xl text-secondary_1">
+            {" "}
+            Pharma<span className="">+</span>
+          </p>
+        </Link>
 
         {/* Contact Info */}
         <FlexBox gap="4" className="hidden lg:flex text-paragraph">

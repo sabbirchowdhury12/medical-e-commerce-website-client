@@ -9,7 +9,7 @@ import React from "react";
 
 const FreaturedProducts = () => {
   return (
-    <div>
+    <div className="md:mt-20">
       <Heading title="Freature Products" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

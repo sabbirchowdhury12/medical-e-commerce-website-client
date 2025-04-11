@@ -20,6 +20,8 @@ import { initializeCart } from "@/redux/slice/cartSlice";
 import MenuItems from "./menu";
 import { text } from "stream/consumers";
 import Drawer from "./drawer";
+import Sidebar from "./sideNavbar";
+import CartIcon from "../cart-icon";
 
 type User = {
   name: string;
@@ -45,8 +47,6 @@ const SecondNav: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.cart.products);
-  const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -62,19 +62,18 @@ const SecondNav: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
-    // Ensure this runs only on the client
-    const storedCart = localStorage.getItem("Medicine-Cart");
-    if (storedCart) {
-      const parsedCart = JSON.parse(storedCart);
-      dispatch(initializeCart(parsedCart));
-    }
-    setIsMounted(true);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const storedCart = localStorage.getItem("Medicine-Cart");
+  //   if (storedCart) {
+  //     const parsedCart = JSON.parse(storedCart);
+  //     dispatch(initializeCart(parsedCart));
+  //   }
+  //   setIsMounted(true);
+  // }, [dispatch]);
 
-  if (!isMounted) {
-    return null;
-  }
+  // if (!isMounted) {
+  //   return null;
+  // }
 
   const handleLogout = () => {
     dispatch(logout());
@@ -155,7 +154,9 @@ const SecondNav: React.FC = () => {
             )}
 
             {/* Cart Icon */}
-            {renderCartIcon(products.length)}
+            <CartIcon />
+
+            {/* {renderCartIcon(products.length)} */}
             <span className="md:hidden" onClick={() => setIsOpen(true)}>
               {" "}
               <MenuIcon />
@@ -164,19 +165,21 @@ const SecondNav: React.FC = () => {
         </FlexBetween>
       </Container>
 
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Sidebar />
+      </Drawer>
     </nav>
   );
 };
 
-export const renderCartIcon = (productCount: number) => (
-  <Link href="/shop/cart">
-    <div className="text-white font-bold relative">
-      <ShoppingCart size={30} />
-      <span className="absolute -top-2 bg-white h-6 w-6 text-center items-center justify-center flex rounded-full text-xs -right-2 text-secondary_1 font-bold">
-        {productCount}
-      </span>
-    </div>
-  </Link>
-);
+// export const renderCartIcon = (productCount: number) => (
+//   <Link href="/shop/cart">
+//     <div className="text-white font-bold relative">
+//       <ShoppingCart size={30} />
+//       <span className="absolute -top-2 bg-white h-6 w-6 text-center items-center justify-center flex rounded-full text-xs -right-2 text-secondary_1 font-bold">
+//         {productCount}
+//       </span>
+//     </div>
+//   </Link>
+// );
 export default SecondNav;

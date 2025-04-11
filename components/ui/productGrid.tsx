@@ -23,7 +23,7 @@ const ProductGrid = ({ products }: any) => {
     setOpenModal(true);
     setCurrentProduct(product);
     setMessage(" Successfully added to your Cart");
-    setButton({ title: "View Cart", path: "/view cart" });
+    setButton({ title: "View Cart", path: "/shop/cart" });
   };
   const handleWishlist = (id: string, product: any) => {
     dispatch(addToWishlist({ id }));
@@ -31,6 +31,13 @@ const ProductGrid = ({ products }: any) => {
     setCurrentProduct(product);
     setMessage(" Successfully added to your Wishlist");
     setButton({ title: "View Wishlist", path: "/view Wishlist" });
+  };
+  const handleView = (id: string, product: any) => {
+    dispatch(addToWishlist({ id }));
+    setOpenModal(true);
+    setCurrentProduct(product);
+    setMessage(" See the details to know more about this product");
+    setButton({ title: "Details", path: `/shop/product/details/${id}` });
   };
 
   return (
@@ -66,6 +73,7 @@ const ProductGrid = ({ products }: any) => {
               product={product}
               handleCart={handleCart}
               handleWishlist={handleWishlist}
+              handleView={handleView}
             />
           </div>
         </motion.div>

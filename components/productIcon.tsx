@@ -6,6 +6,7 @@ interface ProductIconProps {
   product: any;
   handleCart: (id: string, product: any) => void;
   handleWishlist: (id: string, product: any) => void;
+  handleView: (id: string, product: any) => void;
 }
 
 const ProductIcon: React.FC<ProductIconProps> = ({
@@ -13,14 +14,17 @@ const ProductIcon: React.FC<ProductIconProps> = ({
   product,
   handleCart,
   handleWishlist,
+  handleView,
 }) => {
   return (
     <>
-      <Link href={`/shop/product/details/${id}`}>
-        <div className="w-12 flex justify-center items-center border-r-2 h-12 text-center border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white">
-          <EyeIcon />
-        </div>
-      </Link>
+      <div
+        onClick={() => handleView(id, product)}
+        className="w-12 flex justify-center items-center border-r-2 h-12 text-center border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white"
+      >
+        <EyeIcon />
+      </div>
+
       <div
         onClick={() => handleCart(id, product)}
         className="w-12 flex justify-center items-center h-12 text-center border-border_color_7 border-r-2 hover:bg-secondary_1 text-paragraph hover:text-white"

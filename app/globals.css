@@ -29,3 +29,9 @@ section {
 .swiper-pagination {
   margin-top: 100px;
 }
+
+/* Customize the Flowbite overlay */
+.custom-modal {
+  background-color: rgba(0, 0, 0, 0.3) !important; /* Soft overlay */
+  backdrop-filter: blur(2px); /* Optional: subtle blur */
+}

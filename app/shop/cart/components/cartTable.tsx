@@ -10,6 +10,7 @@ import { Table } from "flowbite-react";
 import { Delete } from "lucide-react";
 
 export function CartTable({ products }: any) {
+  console.log(products, "products");
   const [cartProducts, setCartProducts] = useState<
     ((typeof products)[0] & { quantity: number })[]
   >([]);
@@ -58,6 +59,8 @@ export function CartTable({ products }: any) {
       prevProducts.filter((product) => product._id !== productId)
     );
   };
+
+  console.log(cartProducts, "cartProducts");
   return (
     <div className="overflow-x-auto">
       <Table hoverable>

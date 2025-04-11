@@ -33,23 +33,24 @@ const profileMenu = [
 
 const Sidebar = ({ setIsOpen }: any) => {
   return (
-    <motion.div
-      initial={{ x: "100%" }} // Start off-screen
-      animate={{ x: 0 }} // Slide in
-      exit={{ x: "100%" }} // Slide out
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed inset-y-0 right-0 w-full sm:w-[300px] md:hidden bg-white shadow-lg z-50 overflow-auto"
-    >
+    // <motion.div
+    //   initial={{ x: "100%" }} // Start off-screen
+    //   animate={{ x: 0 }} // Slide in
+    //   exit={{ x: "100%" }} // Slide out
+    //   transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    //   className="fixed inset-y-0 right-0 w-full sm:w-[300px] md:hidden bg-white shadow-lg z-50 overflow-auto"
+    // >
+    <>
       <FlexBetween className=" bg-secondary_1 h-32 text-white p-4 border-b">
         <div className="h-10  w-28">
           <CustomImage src={Logo} alt="Logo" className="h-full  w-full" />
         </div>
-        <button
+        {/* <button
           onClick={() => setIsOpen(false)}
           className="text-xl focus:outline-none absolute top-2 right-2"
         >
           <X />
-        </button>
+        </button> */}
       </FlexBetween>
 
       {/* <div className="relative w-full mb-6">
@@ -72,7 +73,7 @@ const Sidebar = ({ setIsOpen }: any) => {
           </Button>
         ))}
       </div> */}
-    </motion.div>
+    </>
   );
 };
 

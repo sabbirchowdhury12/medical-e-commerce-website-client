@@ -11,6 +11,8 @@ import ProductGrid from "@/components/ui/productGrid";
 import { motion } from "framer-motion";
 import { useGetAllCategoryQuery } from "@/redux/api/categoriesApi";
 import { CardLoaderPage } from "@/components/cardLoader";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const tabVariants = {
   initial: { opacity: 0.5, scale: 0.95 },
@@ -29,8 +31,6 @@ const ProductSection = () => {
   }
 
   const products = productData?.data;
-  console.log(products);
-  console.log("categoryid", categoryId);
 
   return (
     <section>
@@ -39,7 +39,7 @@ const ProductSection = () => {
         sub_title="A highly efficient slip-ring scanner for today's diagnostic requirements."
       />
 
-      <FlexBox className="flex-wrap my-14 gap-8">
+      <FlexBox className="flex-wrap mt-14 gap-8">
         {categories?.data?.map((item: any) => (
           <motion.div
             key={item?.slug}
@@ -63,7 +63,12 @@ const ProductSection = () => {
           </motion.div>
         ))}
       </FlexBox>
-
+      <Link
+        href={"/shop/product"}
+        className="text-center gap-2 font-bold text-secondary_1 flex justify-end items-center mt-7 mb-2 text-sm"
+      >
+        See More <ArrowRight size={14} />
+      </Link>
       {/* product card  */}
 
       <ProductGrid products={products} />

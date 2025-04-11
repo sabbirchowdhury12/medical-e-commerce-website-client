@@ -4,6 +4,7 @@ import FlexBox from "@/components/layout/flexbox";
 import Button from "@/components/ui/button";
 import { Modal } from "flowbite-react";
 import { CircleCheck } from "lucide-react";
+import Link from "next/link";
 
 type ModalProps = {
   openModal?: boolean;
@@ -26,7 +27,7 @@ const CustomModal: React.FC<ModalProps> = ({
       dismissible
       show={openModal}
       onClose={() => setOpenModal(false)}
-      className="pt-40 "
+      className="pt-40 custom-modal"
       popup
     >
       <Modal.Header />
@@ -43,7 +44,9 @@ const CustomModal: React.FC<ModalProps> = ({
           <FlexBox className="my-6 justify-start items-center gap-2 font-sans text-lg text-paragraph ">
             <CircleCheck color="#0a9a73" /> {message}
           </FlexBox>
-          <Button>{button.title}</Button>
+          <Link href={button.path}>
+            <Button>{button.title}</Button>
+          </Link>
         </div>
       </FlexBetween>
     </Modal>

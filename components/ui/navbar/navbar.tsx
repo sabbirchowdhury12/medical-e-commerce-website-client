@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
       {isSticky && <StickyNav />}
       <TopNav />
       <SecondNav />
-      <MenuNav />
+      {/* <MenuNav /> */}
     </>
   );
 };

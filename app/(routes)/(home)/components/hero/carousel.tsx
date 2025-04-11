@@ -1,9 +1,29 @@
 import CustomImage from "@/components/image/customImage";
 import Button from "@/components/ui/button";
-import { carouselItems } from "@/utils/data";
 import { Carousel } from "flowbite-react";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+
+export const carouselItems = [
+  {
+    src: "https://tunatheme.com/tf/html/vicodin-preview/vicodin/img/slider/61.jpg",
+    alt: "Medicine Image 1",
+    title: "Your Health, Our Priority",
+    subtitle: "Explore our wide range of medicines",
+  },
+  {
+    src: "https://plus.unsplash.com/premium_photo-1673589625805-eaafd711a942?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG1lZGljaW5lJTIwYm90dGxlfGVufDB8fDB8fHww",
+    alt: "Medicine Image 2",
+    title: "Trusted by Professionals",
+    subtitle: "Quality medicines at your doorstep",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1544991936-9464fa9919d2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1lZGljaW5lJTIwYm90dGxlfGVufDB8fDB8fHww",
+    alt: "Medicine Image 3",
+    title: "Affordable Healthcare",
+    subtitle: "We care about your well-being",
+  },
+];
 
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -13,7 +33,8 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="h-[600px] bg-gray-300 ">
+    <div className="h-[600px] bg-gray-300 relative">
+      <div className="absolute top-0 bi"></div>
       <Carousel slide={false} onSlideChange={handleSlideChange}>
         {carouselItems.map((item, index) => (
           <div
@@ -25,7 +46,7 @@ const HeroCarousel = () => {
               alt={item.alt}
               className="absolute inset-0 w-full h-full object-cover block"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center text-primary_1">
+            <div className="absolute inset-0  bg-opacity-10 flex items-center justify-center text-primary_1">
               {currentSlide === index && (
                 <motion.div
                   key={index}

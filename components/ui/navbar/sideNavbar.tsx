@@ -1,24 +1,33 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { X, Search, User, ShoppingBag } from "lucide-react";
+import {
+  X,
+  Search,
+  User,
+  ShoppingBag,
+  User2,
+  ShoppingCartIcon,
+} from "lucide-react";
 import CustomImage from "../../image/customImage";
 import Logo from "../../../assets/logo.png";
 import { menu } from "@/utils/data";
 import CustomAccordion from "../customAccordion";
 import FlexBetween from "@/components/layout/flexBetween";
 import SearchForm from "@/components/form/searchForm";
-import { HR } from "flowbite-react";
+import MenuItems from "./menu";
+import FlexBox from "@/components/layout/flexbox";
+import Button from "../button";
 
 const profileMenu = [
   {
     title: "My Account",
     path: "/login",
-    icon: <User size={18} color="#5C727D" />,
+    icon: <User2 size={18} />,
   },
   {
     title: "Your Cart",
     path: "/cart",
-    icon: <ShoppingBag size={18} color="#5C727D" />,
+    icon: <ShoppingCartIcon size={18} />,
   },
 ];
 
@@ -29,39 +38,40 @@ const Sidebar = ({ setIsOpen }: any) => {
       animate={{ x: 0 }} // Slide in
       exit={{ x: "100%" }} // Slide out
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed inset-y-0 right-0 w-full sm:w-3/4 md:hidden bg-white shadow-lg z-50 p-6"
+      className="fixed inset-y-0 right-0 w-full sm:w-[300px] md:hidden bg-white shadow-lg z-50 overflow-auto"
     >
-      <FlexBetween className="my-20">
+      <FlexBetween className=" bg-secondary_1 h-32 text-white p-4 border-b">
         <div className="h-10  w-28">
           <CustomImage src={Logo} alt="Logo" className="h-full  w-full" />
         </div>
         <button
           onClick={() => setIsOpen(false)}
-          className="text-xl focus:outline-none"
+          className="text-xl focus:outline-none absolute top-2 right-2"
         >
           <X />
         </button>
       </FlexBetween>
 
-      <div className="relative w-full mb-6">
+      {/* <div className="relative w-full mb-6">
         <SearchForm />
-      </div>
+      </div> */}
 
-      <HR />
+      {/* <CustomAccordion data={menu} /> */}
+      <FlexBox className="my-12  flex-col gap-10 ">
+        <MenuItems />
+      </FlexBox>
 
-      <CustomAccordion data={menu} />
-
-      <div className="mt-6">
+      {/* <div className="mt-6">
         {profileMenu.map((item, index) => (
-          <div
+          <Button
             key={index}
-            className="flex items-center gap-4 py-2.5 hover:bg-gray-100 rounded-lg cursor-pointer"
+            // className="flex text-sm p-2 mt-4 border-none bg-primary_1 border  items-center justify-center gap-4  hover:bg-gray-100 rounded-lg cursor-pointer"
           >
-            <span className="p-2.5 bg-gray-200 rounded-full">{item.icon}</span>
-            <span className="font-semibold">{item.title}</span>
-          </div>
+            <span className="">{item.icon}</span>
+            <span className="">{item.title}</span>
+          </Button>
         ))}
-      </div>
+      </div> */}
     </motion.div>
   );
 };

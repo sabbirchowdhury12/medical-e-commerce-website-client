@@ -9,27 +9,22 @@ export const menu = [
   {
     title: "Home ",
     path: "/home",
-    submenu: [{ title: "Home Page 01", path: "/" }],
   },
   {
     title: "Shop ",
     path: "/shop",
-    submenu: [{ title: "Shop Page 01", path: "shop/product" }],
   },
   {
     title: "About ",
     path: "/about",
-    submenu: [{ title: "About Page 01", path: "about" }],
   },
   {
     title: "Contact ",
     path: "/contact",
-    submenu: [{ title: "Contact Page 01", path: "/contact" }],
   },
   {
     title: "Service",
     path: "/service",
-    submenu: [{ title: "Service Page 01", path: "/service" }],
   },
 ];
 
@@ -40,17 +35,17 @@ export const heroCard = [
     img: heroCardImg1,
   },
   {
-    title: "Free shipping ",
-    desc: "On all orders over $49.00",
+    title: "Quick delivery ",
+    desc: "Delivery in 1 hour",
     img: heroCardImg2,
   },
   {
-    title: "Free shipping ",
-    desc: "On all orders over $49.00",
+    title: "Fastsest service",
+    desc: "Easy and secure service",
     img: heroCardImg3,
   },
   {
-    title: "Free shipping ",
+    title: "Get 10% off",
     desc: "On all orders over $49.00",
     img: heroCardImg4,
   },

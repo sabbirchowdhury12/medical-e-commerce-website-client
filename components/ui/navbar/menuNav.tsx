@@ -13,10 +13,6 @@ import Drawer from "./drawer";
 const MenuNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   return (
     <>
       <FlexBox

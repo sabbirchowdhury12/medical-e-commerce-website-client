@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import {
   CircleUserRound,
   LogOut,
+  MenuIcon,
   PhoneCall,
-  Search,
   Settings,
   ShoppingCart,
   Store,
@@ -12,26 +12,42 @@ import {
 import Container from "@/components/layout/container";
 import FlexBetween from "@/components/layout/flexBetween";
 import FlexBox from "@/components/layout/flexbox";
-import SearchForm from "@/components/form/searchForm";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { logout } from "@/redux/slice/authSlice";
 import { useRouter } from "next/navigation";
 import { initializeCart } from "@/redux/slice/cartSlice";
+import MenuItems from "./menu";
+import { text } from "stream/consumers";
+import Drawer from "./drawer";
 
-// Define User type
 type User = {
   name: string;
-  [key: string]: any; // For any additional properties
+  [key: string]: any;
 };
 
+const SecondNavData = {
+  logo: {
+    text: "Pharma+",
+    src: "/images/logo.png",
+  },
+  phone: {
+    text: "Phone",
+    number: "+0123-456-789",
+    icon: <PhoneCall size={30} />,
+  },
+};
+
+const { logo, phone } = SecondNavData;
+
 const SecondNav: React.FC = () => {
-  const [activeSearch, setActiveSearch] = useState<boolean>(false);
+  // const [activeSearch, setActiveSearch] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.cart.products);
   const [isMounted, setIsMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -65,34 +81,23 @@ const SecondNav: React.FC = () => {
     router.push("/login");
   };
 
-  const renderCartIcon = () => (
-    <Link href="/shop/cart">
-      <div className="text-[#000000c8] font-bold relative">
-        <ShoppingCart size={30} />
-        <span className="absolute -top-2 bg-secondary_1 h-6 w-6  text-center items-center justify-center flex rounded-full p-1 text-[10px] -right-2 text-white">
-          {products.length}
-        </span>
-      </div>
-    </Link>
-  );
-
   // Render User Section (Logged in)
   const renderUserSection = () => (
     <FlexBox className="group relative" gap="2">
       <span className="font-bold font-sans capitalize">{user?.name}</span>
-      <div className="text-[#000000c8] font-bold">
+      <div className="text-white font-bold">
         <CircleUserRound size={28} />
       </div>
       <div className="opacity-0 group-hover:opacity-100 flex absolute top-9 shadow-lg border border-border_color_7 z-10 w-40 gap-2  bg-white flex-col transition-opacity duration-300  text-sm">
         <FlexBox
-          className="hover:bg-section_bg_1 text-paragraph hover:text-secondary_1 font-bold p-4"
+          className="hover:bg-section_bg_1 text-paragraph hover: font-bold p-4"
           gap="2"
         >
           <Store />
           <button>Profile</button>
         </FlexBox>
         <FlexBox
-          className="hover:bg-section_bg_1 text-paragraph hover:text-secondary_1 font-bold p-4"
+          className="hover:bg-section_bg_1 text-paragraph hover: font-bold p-4"
           gap="2"
         >
           <Settings />
@@ -100,7 +105,7 @@ const SecondNav: React.FC = () => {
         </FlexBox>
         <div onClick={handleLogout}>
           <FlexBox
-            className="hover:bg-section_bg_1 text-paragraph hover:text-secondary_1 font-bold p-4"
+            className="hover:bg-section_bg_1 text-paragraph hover: font-bold p-4"
             gap="2"
           >
             <LogOut />
@@ -114,69 +119,64 @@ const SecondNav: React.FC = () => {
   // Render Cart Icon
 
   return (
-    <Container>
-      <FlexBetween className="p-6">
-        {/* Logo */}
-        {/* <FlexBox gap="4">
-          <CustomImage src={Logo} alt="Logo" />
-        </FlexBox> */}
+    <nav className="bg-secondary_1 ">
+      <Container>
+        <FlexBetween className="p-6 text-white">
+          <Link href={"/"}>
+            <p className="font-bold text-2xl "> {logo.text}</p>
+          </Link>
 
-        <Link href={"/"}>
-          <p className="font-bold text-2xl text-secondary_1">
-            {" "}
-            Pharma<span className="">+</span>
-          </p>
-        </Link>
+          {/* Contact Info */}
+          <FlexBox gap="4" className="hidden lg:flex text-white">
+            {phone.icon}
+            <p className="text-sm font-semibold">
+              {phone.text} <br />
+              {phone.number}
+            </p>
+          </FlexBox>
 
-        {/* Contact Info */}
-        <FlexBox gap="4" className="hidden lg:flex text-paragraph">
-          <PhoneCall size={30} />
-          <p className="text-sm font-semibold">
-            Phone <br />
-            +0123-456-789
-          </p>
-        </FlexBox>
+          <FlexBox
+            className=" p-6 text-sm font-bold  uppercase hidden md:flex "
+            gap="8"
+          >
+            <MenuItems />
+          </FlexBox>
 
-        {/* Search Form */}
-        <div className="relative">
-          <span className="hidden md:block">
-            <SearchForm />
-          </span>
-        </div>
-
-        {/* User Actions */}
-        <FlexBox gap="6" className="relative">
-          {/* Mobile Search Icon */}
-          <span className="relative md:hidden">
-            <Search
-              size={28}
-              className="text-[rgba(0,0,0,0.78)] font-bold"
-              onClick={() => setActiveSearch((prev) => !prev)}
-            />
-            {activeSearch && (
-              <span className="absolute top-8 right-1/2 w-40 transform translate-x-1/2">
-                <SearchForm />
-              </span>
+          <FlexBox gap="6" className="relative">
+            {/* User Profile Section */}
+            {user ? (
+              renderUserSection()
+            ) : (
+              <Link href="/login">
+                <div className="text-white font-bold">
+                  <CircleUserRound size={28} />
+                </div>
+              </Link>
             )}
-          </span>
 
-          {/* User Profile Section */}
-          {user ? (
-            renderUserSection()
-          ) : (
-            <Link href="/login">
-              <div className="text-[#000000c8] font-bold">
-                <CircleUserRound size={28} />
-              </div>
-            </Link>
-          )}
+            {/* Cart Icon */}
+            {renderCartIcon(products.length)}
+            <span className="md:hidden" onClick={() => setIsOpen(true)}>
+              {" "}
+              <MenuIcon />
+            </span>
+          </FlexBox>
+        </FlexBetween>
+      </Container>
 
-          {/* Cart Icon */}
-          {renderCartIcon()}
-        </FlexBox>
-      </FlexBetween>
-    </Container>
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />
+    </nav>
   );
 };
 
+export const renderCartIcon = (productCount: number) => (
+  <Link href="/shop/cart">
+    <div className="text-white font-bold relative">
+      <ShoppingCart size={30} />
+      <span className="absolute -top-2 bg-white h-6 w-6 text-center items-center justify-center flex rounded-full text-xs -right-2 text-secondary_1 font-bold">
+        {productCount}
+      </span>
+    </div>
+  </Link>
+);
 export default SecondNav;

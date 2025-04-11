@@ -8,25 +8,21 @@ const MenuItems = () => {
     <>
       {menu.map((item, ind) => {
         return (
-          <Dropdown
-            key={ind}
-            arrowIcon={false}
-            inline
-            label={
-              <p className="uppercase">
-                {item.title} {item.submenu ? "+" : ""}
-              </p>
-            }
-          >
-            {item.submenu &&
+          <Link key={ind} href={item.path}>
+            <p className="uppercase">
+              {item.title}
+
+              {/* {item.submenu ? "+" : ""} */}
+            </p>
+            {/* {item.submenu &&
               item.submenu.map((subItem, subInd) => {
                 return (
                   <Link key={subInd} href={subItem.path}>
                     <Dropdown.Item>{subItem.title}</Dropdown.Item>
                   </Link>
                 );
-              })}
-          </Dropdown>
+              })} */}
+          </Link>
         );
       })}
     </>

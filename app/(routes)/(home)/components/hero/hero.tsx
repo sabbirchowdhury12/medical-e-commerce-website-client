@@ -2,7 +2,7 @@
 
 import FlexBetween from "@/components/layout/flexBetween";
 import FlexBox from "@/components/layout/flexbox";
-import { MenuIcon } from "lucide-react";
+import { AlignLeft, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 
@@ -24,8 +24,9 @@ const Hero = () => {
       <div className="flex gap-6 my-10 flex-col md:flex-row">
         <div className="category">
           <span onClick={toggleCategories}>
-            <FlexBetween className="bg-secondary_1  md:gap-10 text-white p-6 cursor-pointer">
-              <MenuIcon />
+            <FlexBetween className="border border-secondary_1 md:bg-secondary_1 md:text-white rounded   md:gap-10  p-6 cursor-pointer">
+              {isOpen ? <X /> : <AlignLeft />}
+
               <p className="text-xl font-bold ml-10">Categories</p>
             </FlexBetween>
           </span>

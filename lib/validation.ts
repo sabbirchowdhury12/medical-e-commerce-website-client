@@ -29,9 +29,9 @@ export const checkoutValidationSchema = Yup.object().shape({
     .email("Enter a valid email")
     .required("Email is required"),
   companyName: Yup.string().required("Company/Local address is required"),
-  division: Yup.string().required("Division is required"),
-  district: Yup.string().required("District is required"),
-  upazilla: Yup.string().required("Upazilla is required"),
+  // division: Yup.string().required("Division is required"),
+  // district: Yup.string().required("District is required"),
+  // upazilla: Yup.string().required("Upazilla is required"),
   roadNo: Yup.string().required("Road number is required"),
   houseNo: Yup.string().required("House number is required"),
   paymentMethod: Yup.string().required("Please select a payment method"),

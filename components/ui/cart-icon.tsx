@@ -4,7 +4,7 @@ import CartDrawer from "./cart-drawer";
 import { ShoppingCart } from "lucide-react";
 import { useGetAllProductQuery } from "@/redux/api/productApi";
 
-const CartIcon = () => {
+const CartIcon = ({ color = "#0a9a73" }) => {
   const { data } = useGetAllProductQuery({});
   const products = data?.data || [];
 
@@ -40,12 +40,14 @@ const CartIcon = () => {
   return (
     <>
       <div
-        className="text-white font-bold relative"
+        className="text-white font-bold relative bg-secondary_1 rounded-full p-2 cursor-pointer "
         onClick={() => setCartDrawerOpen(true)}
       >
-        <ShoppingCart size={30} />
-        <span className="absolute -top-2 bg-white h-6 w-6 text-center items-center justify-center flex rounded-full text-xs -right-2 text-secondary_1 font-bold">
-          {products.length}
+        <ShoppingCart size={24} />
+        <span
+          className={`absolute -top-2 bg-white text-secondary_1 h-6 w-6 text-center items-center justify-center flex rounded-full text-xs -right-2 text-[${color}] font-bold`}
+        >
+          {cartProducts.length}
         </span>
       </div>
       <CartDrawer

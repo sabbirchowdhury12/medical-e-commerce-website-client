@@ -1,7 +1,10 @@
 interface DropdownInputProps {
   label: string;
   value?: string; // Make value optional
-  items: string[];
+  items: {
+    label: string;
+    value: string;
+  }[];
   onChange?: (value: string) => void;
   disabled?: boolean;
   name?: string; // Add name prop for form registration
@@ -39,8 +42,8 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({
           Select a {label.toLowerCase()}
         </option>
         {items.map((item) => (
-          <option key={item} value={item}>
-            {item}
+          <option key={item.value} value={item.value}>
+            {item.label}
           </option>
         ))}
       </select>

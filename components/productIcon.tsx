@@ -20,23 +20,23 @@ const ProductIcon: React.FC<ProductIconProps> = ({
     <>
       <div
         onClick={() => handleView(id, product)}
-        className="w-12 flex justify-center items-center border-r-2 h-12 text-center border-border_color_7 hover:bg-secondary_1 text-paragraph hover:text-white"
+        className="w-12 flex justify-center items-center border-r-2 border-section_bg_1 shadow-xl h-12 text-center  hover:bg-secondary_1 text-paragraph hover:text-white"
       >
         <EyeIcon />
       </div>
 
       <div
         onClick={() => handleCart(id, product)}
-        className="w-12 flex justify-center items-center h-12 text-center border-border_color_7 border-r-2 hover:bg-secondary_1 text-paragraph hover:text-white"
+        className="w-12 flex justify-center items-center h-12 shadow-xl text-center border-none border-r-2 hover:bg-secondary_1 text-paragraph hover:text-white"
       >
         <ShoppingCart />
       </div>
-      <div
+      {/* <div
         onClick={() => handleWishlist(id, product)}
         className="w-12 flex justify-center items-center h-12 text-center hover:bg-secondary_1 text-paragraph hover:text-white"
       >
         <Heart />
-      </div>
+      </div> */}
     </>
   );
 };

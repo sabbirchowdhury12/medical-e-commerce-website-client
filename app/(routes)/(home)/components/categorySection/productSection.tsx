@@ -42,6 +42,7 @@ const ProductSection = () => {
       <FlexBox className="flex-wrap mt-14 gap-8">
         {categories?.data?.map((item: any) => (
           <motion.div
+            onClick={() => setCategoryId(item?._id)}
             key={item?.slug}
             initial="initial" // Use the variant label
             animate={categoryId === item?._id ? "animate" : "initial"}
@@ -50,7 +51,6 @@ const ProductSection = () => {
           >
             <FlexBox className="w-52 cursor-pointer text-center bg-section_bg_1 p-2 rounded">
               <p
-                onClick={() => setCategoryId(item?._id)}
                 className={`uppercase text-lg font-bold text-wrap text-center pb-4 font-sans ${
                   setCategoryId === item?._id
                     ? "text-secondary_1 border-b"

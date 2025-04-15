@@ -1,0 +1,75 @@
+const getAllSemesters = async (
+  filters: IAcademicSemesterFilters,
+  paginationOptions: IPaginationOptions
+): Promise<IGenericResponse<IAcademinSemester[]>> => {
+  const { searchTerm, ...filtersData } = filters
+
+  const andConditions = []
+
+  if (searchTerm) {
+    andConditions.push({
+      $or: academicSemesterSearchableFields.map(element => ({
+        [element]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    })
+  }
+
+  if (Object.keys(filtersData).l ength) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    })
+  }
+
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelpers.calculatePagination(paginationOptions)
+
+  const sortConditions: { [key: string]: SortOrder } = {}
+
+  if (sortBy && sortOrder) {
+    sortConditions[sortBy] = sortOrder
+  }
+
+  const total = await AcademicSemester.countDocuments()
+
+  const whereConditon = andConditions.length > 0 ? { $and: andConditions } : {}
+  const result = await AcademicSemester.find(whereConditon)
+    .sort(sortConditions)
+    .skip(skip)
+    .limit(limit)
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  }
+}
+
+
+
+
+ const filters = pick(req.query, academicSemesterFilterableFields)
+  // console.log(filters)
+  const paginationOptions = pick(req.query, paginationFields)
+
+  const result = await AcademicSemesterService.getAllSemesters(
+    filters,
+    paginationOptions
+  )
+
+  
+export const academicSemesterSearchableFields = ['title', 'code']
+
+export const academicSemesterFilterableFields = [
+  'searchTerm',
+  'title',
+  'code',
+  'year',
+]

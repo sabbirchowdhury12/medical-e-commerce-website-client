@@ -1,12 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import {
+  Minus,
+  Plus,
+  ShoppingBag,
+  ShoppingCart,
+  Trash2,
+  X,
+} from "lucide-react";
 import CustomImage from "@/components/image/customImage";
 import { useAppDispatch } from "@/redux/hook";
 import { removeProduct, updateProduct } from "@/redux/slice/cartSlice";
 import React from "react";
 import Button from "./button";
+import Link from "next/link";
 
 type CartDrawerProps = {
   isOpen: boolean;
@@ -62,7 +70,7 @@ const CartDrawer = ({
         {/* Header */}
         <div className="p-4 border-b border-gray-100 flex bg-secondary_1 justify-between items-center sticky top-0 z-10">
           <h3 className="text-xl font-semibold flex items-center ">
-            <ShoppingBag className="mr-2 h-5 w-5" />
+            <ShoppingCart className="mr-2 h-5 w-5" />
             Your Cart
             {products.length > 0 && (
               <span className="ml-2 text-sm bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full">
@@ -83,15 +91,18 @@ const CartDrawer = ({
           {products.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full p-6 text-center">
               <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
-                <ShoppingBag className="h-10 w-10 text-gray-400" />
+                <ShoppingCart className="h-10 w-10 text-gray-400" />
               </div>
               <h4 className="text-lg font-medium mb-2">Your cart is empty</h4>
               <p className="text-gray-500 mb-6">
                 Looks like you haven&apos;t added any products to your cart yet.
               </p>
-              <Button onClick={() => setIsOpen(false)}>
+              <Link
+                href="/product"
+                className="bg-secondary_1 p-2 px-4 text-sm rounded"
+              >
                 Continue Shopping
-              </Button>
+              </Link>
             </div>
           ) : (
             <div className="p-2 space-y-4 mt-5">
@@ -109,7 +120,9 @@ const CartDrawer = ({
                   </div>
 
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">{product.name}</p>
+                    <p className="font-medium text-gray-900 text-sm">
+                      {product.name}
+                    </p>
                     <p className="text-gray-500 text-sm mt-0.5">
                       ${product.defaultPrice.toFixed(2)}
                     </p>
@@ -164,11 +177,14 @@ const CartDrawer = ({
         {products.length > 0 && (
           <div className="border-t border-gray-100 p-4 bg-white sticky bottom-0">
             {/* <Button className="w-full">Proceed to Checkout</Button> */}
-            <button className="relative flex h-[60px] w-full items-center justify-center  hover:border-black overflow-hidden bg-secondary_1 text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0  hover:text-black  before:bg-white before:duration-500 before:ease-out hover:shadow-orange-600 hover:before:h-56 hover:before:w-full">
+            <Link
+              href={"/cart"}
+              className="relative flex h-[60px] w-full items-center justify-center  hover:border-black overflow-hidden bg-secondary_1 text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0  hover:text-black  before:bg-white before:duration-500 before:ease-out hover:shadow-orange-600 hover:before:h-56 hover:before:w-full"
+            >
               <span className="relative z-10 font-sans text-lg font-semibold">
                 View Cart
               </span>
-            </button>
+            </Link>
           </div>
         )}
       </motion.div>

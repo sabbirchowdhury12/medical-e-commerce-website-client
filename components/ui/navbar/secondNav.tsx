@@ -136,7 +136,7 @@ const SecondNav: React.FC = () => {
 
           <FlexBox
             className=" p-6 text-sm font-bold  uppercase hidden md:flex "
-            gap="8"
+            gap="4"
           >
             <MenuItems />
           </FlexBox>

@@ -98,7 +98,7 @@ const LoginForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex-1 md:w-3/4 mx-auto mb-20"
+      className="flex-1 md:w-3/4 w-full mx-auto mb-20 p-4"
     >
       <FormInput
         labelValue="Email"

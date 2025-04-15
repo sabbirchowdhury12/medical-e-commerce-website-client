@@ -7,12 +7,12 @@ import { title } from "process";
 
 export const menu = [
   {
-    title: "Home ",
-    path: "/home",
+    title: "Home",
+    path: "/",
   },
   {
     title: "Shop ",
-    path: "/shop",
+    path: "/product",
   },
   {
     title: "About ",
@@ -58,15 +58,15 @@ export const categories = [
     submenu: [
       {
         title: "Pain Killer",
-        path: "/shop/product",
+        path: "/product",
       },
       {
         title: "Gastic",
-        path: "/shop/product",
+        path: "/product",
       },
       {
         title: "Diabetic",
-        path: "/shop/product",
+        path: "/product",
       },
     ],
   },
@@ -76,15 +76,15 @@ export const categories = [
     submenu: [
       {
         title: "sergical product",
-        path: "/shop/product",
+        path: "/product",
       },
       {
         title: "Frist Aid",
-        path: "/shop/product",
+        path: "/product",
       },
       {
         title: "Device ",
-        path: "/shop/product",
+        path: "/product",
       },
     ],
   },
@@ -94,11 +94,11 @@ export const categories = [
     submenu: [
       {
         title: "Mask",
-        path: "/shop/product",
+        path: "/product",
       },
       {
         title: "PPI",
-        path: "/shop/product",
+        path: "/product",
       },
     ],
   },
@@ -108,7 +108,7 @@ export const categories = [
     submenu: [
       {
         title: "Sanitizer",
-        path: "/shop/product",
+        path: "/product",
       },
     ],
   },

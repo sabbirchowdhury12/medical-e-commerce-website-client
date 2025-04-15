@@ -13,14 +13,9 @@ const LoginPage = () => {
   return (
     <div>
       <Breadcrumbs title={"login"} />
-      <Heading
-        title="Sign In 
-To Your Account"
-        sub_title="Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-Sit aliquid, Non distinctio vel iste.
-
-"
-      />
+      <h1 className="font-bold text-3xl text-heading_color text-center">
+        Sign In
+      </h1>
       <Container>
         <FlexBetween className="flex-col ">
           <LoginForm />

@@ -38,7 +38,7 @@ const TopNav: React.FC = () => {
       <Container>
         <FlexBetween className="flex-col md:flex-row text-[12px] font-bold p-2 text-paragraph gap-4">
           {/* Contact Info Section */}
-          <FlexBox className="gap-7">
+          <FlexBox className="gap-2 md:gap-7 flex-col sm:flex-row">
             <FlexBox gap="2">
               <div className="social-icon">{email.icon}</div>
               <span className="hover:text-secondary_1">

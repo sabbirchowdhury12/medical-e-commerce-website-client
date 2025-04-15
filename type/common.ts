@@ -15,9 +15,9 @@ export interface CheckoutFormValues {
   phone: string;
   email: string;
   companyName: string;
-  division: string;
-  district: string;
-  upazilla: string;
+  // division: string;
+  // district: string;
+  // upazilla: string;
   roadNo: string;
   houseNo: string;
   paymentMethod: string;
@@ -59,6 +59,8 @@ export interface ICategory {
 }
 
 export interface Division {
+  name: string;
+  id: string;
   division: string;
   divisionbn: string;
   coordinates: string;

@@ -11,6 +11,7 @@ import MenuItems from "./menu";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hook";
 import { ShoppingCart } from "lucide-react";
+import CartIcon from "../cart-icon";
 
 const logo = {
   text: "Pharma+",
@@ -34,7 +35,11 @@ const StickyNav = () => {
             <MenuItems />
           </FlexBox>
 
-          {renderCartIcon(products.length)}
+          {/* {renderCartIcon(products.length)}
+           */}
+          <div className="text-white">
+            <CartIcon />
+          </div>
         </FlexBetween>
       </Container>
     </div>

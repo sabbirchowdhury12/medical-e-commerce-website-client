@@ -10,8 +10,6 @@ const CustomAccordion = ({ data }: any) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  console.log("data", data);
-
   return (
     <div className="mt-5">
       {data?.map((item: any, index: number) => (

@@ -23,7 +23,7 @@ const ProductGrid = ({ products }: any) => {
     setOpenModal(true);
     setCurrentProduct(product);
     setMessage(" Successfully added to your Cart");
-    setButton({ title: "View Cart", path: "/shop/cart" });
+    setButton({ title: "View Cart", path: "/cart" });
   };
   const handleWishlist = (id: string, product: any) => {
     dispatch(addToWishlist({ id }));
@@ -37,7 +37,7 @@ const ProductGrid = ({ products }: any) => {
     setOpenModal(true);
     setCurrentProduct(product);
     setMessage(" See the details to know more about this product");
-    setButton({ title: "Details", path: `/shop/product/details/${id}` });
+    setButton({ title: "Details", path: `/product/details/${id}` });
   };
 
   return (

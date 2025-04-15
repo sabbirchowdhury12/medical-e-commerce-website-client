@@ -17,6 +17,8 @@ import SearchForm from "@/components/form/searchForm";
 import MenuItems from "./menu";
 import FlexBox from "@/components/layout/flexbox";
 import Button from "../button";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const profileMenu = [
   {
@@ -32,6 +34,8 @@ const profileMenu = [
 ];
 
 const Sidebar = ({ setIsOpen }: any) => {
+  const pathname = usePathname();
+
   return (
     // <motion.div
     //   initial={{ x: "100%" }} // Start off-screen
@@ -58,8 +62,24 @@ const Sidebar = ({ setIsOpen }: any) => {
       </div> */}
 
       {/* <CustomAccordion data={menu} /> */}
-      <FlexBox className="my-12  flex-col gap-10 ">
-        <MenuItems />
+      <FlexBox className="my-12  flex-col text-black text-sm font-semibold">
+        <>
+          {menu.map((item, ind) => {
+            const isActive = pathname === item.path;
+
+            return (
+              <Link key={ind} href={item.path} className="w-full text-center">
+                <p
+                  className={`uppercase  py-4 w-full px-4  transition-colors duration-300 ${
+                    isActive ? " bg-secondary_1 text-white font-semibold" : ""
+                  }`}
+                >
+                  {item.title}
+                </p>
+              </Link>
+            );
+          })}
+        </>
       </FlexBox>
 
       {/* <div className="mt-6">
